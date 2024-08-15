@@ -1,28 +1,32 @@
 <template>
-  <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
+  <div class="flex items-center justify-center px-5 h-screen">
+    <ProductCardVue v-for="product in products" :key="product.id" :product="product" :currency="APICurrency" />
+  </div>
 </template>
 
 <script>
 import axios from 'axios'
+import ProductCardVue from './components/ProductCard.vue'
 
 export default {
+  components: {
+    ProductCardVue
+  },
   data() {
     return {
-      msg: 'Hello World'
+      products: [],
+      APICurrency: '$'
     }
   },
   mounted() {
-    this.test()
+    this.fetchData()
   },
   methods: {
-    async test() {
-      axios.get('products').then((response) => {
-        console.log('data', response.data)
+    async fetchData() {
+      axios.get('/products/23').then((response) => {
+        response.data.discount = 20;
+        this.products.push(response.data);
       })
-      // let data = await fetch('products')
-      // console.log('data', data)
     }
   }
 }
