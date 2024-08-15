@@ -1,5 +1,5 @@
 <template>
-    <div class="w-80 bg-white rounded-xl shadow">
+    <div class="w-80 bg-white rounded-xl shadow duration-300 hover:scale-105">
         <img class="object-cotain w-full h-80 rounded-t-xl" :src="imageSrc" alt="Product image">
         <div class="space-y-4 p-4 pt-6">
             <p class="text-lg font-bold leading-6">{{ product.title }}</p>
