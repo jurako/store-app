@@ -30,7 +30,7 @@ export default {
     imageSrc() {
       //TO DO: return a default image if product has noone
       // return this.product.images.length ? this.product.images.pop() : //default image
-      return this.product.images[0];
+      return this.product.images[0].replaceAll(/"|\[/gi, '')
     },
     price() {
       return this.product.price.toFixed(2)
