@@ -20,7 +20,7 @@
         </svg>
       </RouterLink>
       <nav>
-        <RouterLink to="#"
+        <RouterLink to="/cart"
           ><FontAwesomeIcon :style="{ color: 'rgb(84, 23, 215)' }" icon="fa-solid fa-cart-shopping" size="lg"
         /></RouterLink>
       </nav>
@@ -30,6 +30,41 @@
     <RouterView />
   </main>
 </template>
+
+<script>
+import axios from 'axios'
+import {computed } from 'vue'
+
+export default {
+  data() {
+    return {
+      products: []
+    }
+  },
+  provide() {
+    return {
+      'APICurrency': '$',
+      'products': computed(() => this.products)
+    }
+  },
+  mounted() {
+    this.fetchData()
+  },
+  methods: {
+    async fetchData() {
+      axios.get('/products?offset=0&limit=10').then((response) => {
+        console.log(response.data)
+        response.data.forEach((element) => {
+          element.discount = Math.random() * (100 - 1) + 1
+        })
+        // response.data.discount = 20;
+        console.log(response.data)
+        this.products = response.data
+      })
+    }
+  }
+}
+</script>
 
 <style scoped>
   .fa-cart-shopping {
