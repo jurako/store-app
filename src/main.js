@@ -9,7 +9,6 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 /* add icons to the library */
 library.add(faCartShopping)
 
-
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import axios from 'axios'
@@ -23,8 +22,6 @@ const app = createApp(App)
 app.use(createPinia())
 app.use(router)
 
-app.component(
-    FontAwesomeIcon
-)
+app.component('FontAwesomeIcon', FontAwesomeIcon)
 
 app.mount('#app')
