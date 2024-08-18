@@ -19,12 +19,12 @@
 <script>
 export default {
   props: {
-    product: Object,
-    currency: String
+    product: Object
   },
-  created() {
-    console.log('From product card', this.product)
-    console.log('imageSrc', this.imageSrc)
+  inject: {
+    currency: {
+      from: 'APICurrency'
+    }
   },
   computed: {
     imageSrc() {
