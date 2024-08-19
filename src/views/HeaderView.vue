@@ -1,12 +1,7 @@
 <template>
   <header class="min-w-72 h-16 bg-cyan-100">
     <div class="flex justify-between items-center gap-x-28 container mx-auto px-8 h-full">
-      <FontAwesomeIcon
-        class="block sm:hidden transition-transform hover:scale-110 hover:cursor-pointer"
-        :style="{ color: 'rgb(84, 23, 215)' }"
-        icon="fa-solid fa-bars"
-        size="lg"
-      />
+      <SideMenu class="sm:hidden" :categories="categories" />
       <RouterLink class="hidden sm:block" to="/">
         <svg
           id="logo-85"
@@ -27,13 +22,9 @@
       </RouterLink>
       <nav></nav>
       <nav>
-        <RouterLink to="/cart"
-          ><FontAwesomeIcon
-            class="transition-transform hover:scale-110"
-            :style="{ color: 'rgb(84, 23, 215)' }"
-            icon="fa-solid fa-cart-shopping"
-            size="lg"
-        /></RouterLink>
+        <RouterLink to="/cart">
+          <BaseIcon iconName="fa-cart-shopping"/>
+        </RouterLink>
       </nav>
     </div>
   </header>
@@ -41,8 +32,11 @@
 
 <script>
 import axios from 'axios'
+import BaseIcon from '../components/BaseIcon.vue'; 
+import SideMenu from '../components/SideMenu.vue';
 
 export default {
+  components: { BaseIcon, SideMenu },
   data() {
     return {
       categories: []
