@@ -1,9 +1,5 @@
 <template>
-  <ProductCard
-    v-for="product in products"
-    :key="product.id"
-    :product="product"
-  />
+  <ProductCard v-for="product in products" :key="product.id" :product="product" />
 </template>
 
 <script>

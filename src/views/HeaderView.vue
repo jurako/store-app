@@ -1,7 +1,13 @@
 <template>
-  <header class="h-16 bg-cyan-100">
-    <div class="flex justify-between items-center container mx-auto px-8 h-full">
-      <RouterLink to="/">
+  <header class="min-w-72 h-16 bg-cyan-100">
+    <div class="flex justify-between items-center gap-x-28 container mx-auto px-8 h-full">
+      <FontAwesomeIcon
+        class="block sm:hidden transition-transform hover:scale-110 hover:cursor-pointer"
+        :style="{ color: 'rgb(84, 23, 215)' }"
+        icon="fa-solid fa-bars"
+        size="lg"
+      />
+      <RouterLink class="hidden sm:block" to="/">
         <svg
           id="logo-85"
           width="40"
@@ -19,11 +25,7 @@
           ></path>
         </svg>
       </RouterLink>
-      <nav class="bg-cyan-700">
-        <div>
-          <a v-for="category in categories" :key="category.id" href="#">{{ category.name }}</a>
-        </div>
-      </nav>
+      <nav></nav>
       <nav>
         <RouterLink to="/cart"
           ><FontAwesomeIcon
@@ -38,11 +40,16 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   data() {
     return {
       categories: []
     }
+  },
+  created() {
+    this.fetchCategories()
   },
   methods: {
     fetchCategories() {

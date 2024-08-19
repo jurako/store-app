@@ -3,11 +3,11 @@ import './assets/main.css'
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
 /* import specific icons */
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import { faCartShopping, faBars } from '@fortawesome/free-solid-svg-icons'
 /* import font awesome icon component */
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 /* add icons to the library */
-library.add(faCartShopping)
+library.add(faCartShopping, faBars)
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
