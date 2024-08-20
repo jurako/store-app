@@ -5,7 +5,15 @@ export default {
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        feldgrau: '#627264',
+        celadon: '#A1CDA8',
+        'celadon-light': '#B5DFCA',
+        'mint-green': '#C5E7E2',
+        'rose-quartz': '#AD9BAA'
+      }
+    },
   },
   plugins: [require('@tailwindcss/forms')],
   darkMode: 'media'
