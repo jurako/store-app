@@ -26,7 +26,7 @@
         </RouterLink>
       </nav>
     </div>
-    <SideMenu :categories="categories" :isVisible="showSideMenu" @toggle="toggleSideMenu"/>
+    <SideMenu :categories="categories" :isVisible="showSideMenu" @toggle="toggleSideMenu" />
   </header>
 </template>
 
@@ -53,7 +53,7 @@ export default {
       })
     },
     toggleSideMenu() {
-      this.showSideMenu = !this.showSideMenu;
+      this.showSideMenu = !this.showSideMenu
     }
   }
 }

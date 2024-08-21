@@ -1,18 +1,18 @@
 <template>
   <div>
-    
-
     <Transition name="fade" v-show="isVisible">
       <div
         class="fixed top-0 left-0 bottom-0 right-0 backdrop-blur-sm transition-display"
         v-show="isVisible"
         @click="$emit('toggle')"
-      >
-      </div>
+      ></div>
     </Transition>
     <Transition name="slide">
-      <div class="side-menu h-screen p-4 w-64 absolute top-0 left-0 bg-celadon-light" v-show="isVisible" @click="emitToggleCheckTarget">
-
+      <div
+        class="side-menu h-screen p-4 w-64 absolute top-0 left-0 bg-celadon-light"
+        v-show="isVisible"
+        @click="emitToggleCheckTarget"
+      >
         <Transition name="fade">
           <div
             class="flex justify-center items-center h-14 w-14 absolute top-2 -right-16 border-2 border-rose-quartz rounded-full hover:bg-rose-quartz hover:cursor-pointer"
@@ -62,8 +62,8 @@ export default {
   props: ['isVisible', 'categories'],
   methods: {
     emitToggleCheckTarget(event) {
-      if(!event.target.classList.contains('side-menu')) {
-        this.$emit('toggle');
+      if (!event.target.classList.contains('side-menu')) {
+        this.$emit('toggle')
       }
     }
   }
