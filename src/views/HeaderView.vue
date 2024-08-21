@@ -1,7 +1,7 @@
 <template>
-  <header class="min-w-72 h-16 bg-celadon-light">
+  <header class="min-w-72 h-16 fixed top-0 left-0 right-0 sm:static z-10 bg-celadon-light">
     <div class="flex justify-between items-center gap-x-28 container mx-auto px-8 h-full">
-      <SideMenu class="sm:hidden" :categories="categories" />
+      <BaseIcon class="sm:hidden" iconName="fa-bars" @click="toggleSideMenu" />
       <RouterLink class="hidden sm:block" to="/">
         <svg
           id="logo-85"
@@ -22,23 +22,25 @@
       </RouterLink>
       <nav>
         <RouterLink to="/cart">
-          <BaseIcon iconName="fa-cart-shopping"/>
+          <BaseIcon iconName="fa-cart-shopping" />
         </RouterLink>
       </nav>
     </div>
+    <SideMenu :categories="categories" :isVisible="showSideMenu" @toggle="toggleSideMenu"/>
   </header>
 </template>
 
 <script>
 import axios from 'axios'
-import BaseIcon from '../components/BaseIcon.vue'; 
-import SideMenu from '../components/SideMenu.vue';
+import BaseIcon from '../components/BaseIcon.vue'
+import SideMenu from '../components/SideMenu.vue'
 
 export default {
   components: { BaseIcon, SideMenu },
   data() {
     return {
-      categories: []
+      categories: [],
+      showSideMenu: false
     }
   },
   created() {
@@ -49,6 +51,9 @@ export default {
       axios.get('/categories').then((response) => {
         this.categories = response.data
       })
+    },
+    toggleSideMenu() {
+      this.showSideMenu = !this.showSideMenu;
     }
   }
 }
