@@ -20,6 +20,11 @@
           ></path>
         </svg>
       </RouterLink>
+      <nav class="categories hidden sm:flex sm:flex-wrap sm:justify-center sm:gap-x-5 sm:basis-full sm:uppercase sm:text-sm md:text-base">
+        <RouterLink v-for="category in categories" :key="category.id" :to="'categories/'+category.id">
+          {{category.name}}
+        </RouterLink>
+      </nav>
       <nav>
         <RouterLink to="/cart">
           <BaseIcon iconName="fa-cart-shopping" />
