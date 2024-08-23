@@ -21,8 +21,9 @@
         </svg>
       </RouterLink>
       <nav class="categories hidden sm:flex sm:flex-wrap sm:justify-center sm:uppercase sm:text-sm md:text-base">
-        <RouterLink class="p-2 hover:bg-rose-quartz" v-for="category in categories" :key="category.id" :to="'categories/'+category.id">
-          {{category.name}}
+        <RouterLink class="p-2 hover:bg-rose-quartz" v-for="category in categories" :key="category"
+          :to="{name: 'product-list', params: {'category_name': category}}">
+          {{category}}
         </RouterLink>
       </nav>
       <nav>
@@ -53,7 +54,7 @@ export default {
   },
   methods: {
     fetchCategories() {
-      axios.get('/categories').then((response) => {
+      axios.get('/products/categories').then((response) => {
         this.categories = response.data
       })
     },

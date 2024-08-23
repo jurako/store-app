@@ -1,4 +1,8 @@
 <template>
+  <p class="text-center" v-if="$route.params.category">
+    {{ $route.params.category }}
+  </p>
+  <!-- {{ $route.params.category_id ? 'Category id: ' + $route.params.category_id + ' list' : 'Products list' }} -->
   <ProductCard v-for="product in products" :key="product.id" :product="product" />
 </template>
 
@@ -12,19 +16,28 @@ export default {
   },
   data() {
     return {
-      products: []
+      products: [],
+      category: {}
     }
   },
   created() {
-    this.fetchData()
+    console.log('Hello from ProductList')
+    this.fetchProducts()
   },
   methods: {
-    fetchData() {
-      axios.get('/products?offset=0&limit=10').then((response) => {
+    fetchProducts() {
+      let url = "/products?limit=10";
+
+      if(this.$route.params.category) {
+        url += "&category=" + this.$route.params.category;
+      }
+
+      axios.get(url).then((response) => {
         response.data.forEach((element) => {
           element.discount = Math.random() * (100 - 1) + 1
         })
         this.products = response.data
+        console.log('this.products', this.products);
       })
     }
   }

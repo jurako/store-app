@@ -7,7 +7,11 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
+      component: ProductList
+    },
+    {
+      path: '/categories/:category_name',
+      name: 'product-list',
       component: ProductList
     },
     {

@@ -43,10 +43,10 @@
           <RouterLink
             class="hover:bg-rose-quartz"
             v-for="category in categories"
-            :key="category.id"
-            :to="'/categories/' + category.id"
+            :key="category"
+            :to="'/categories/' + category"
           >
-            {{ category.name }}
+            {{ category }}
           </RouterLink>
         </nav>
       </div>
