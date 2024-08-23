@@ -42,6 +42,7 @@
         <nav class="flex flex-col mt-2 gap-y-2 uppercase text-center hover:cursor-pointer">
           <RouterLink
             class="hover:bg-rose-quartz"
+            activeClass="bg-rose-quartz"
             v-for="category in categories"
             :key="category"
             :to="'/categories/' + category"

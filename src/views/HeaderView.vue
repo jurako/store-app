@@ -1,5 +1,7 @@
 <template>
-  <header class="min-w-72 min-h-16 flex items-center fixed top-0 left-0 right-0 sm:static z-10 bg-celadon-light">
+  <header
+    class="min-w-72 min-h-16 flex items-center fixed top-0 left-0 right-0 sm:static z-10 bg-celadon-light"
+  >
     <div class="flex justify-between items-center gap-x-28 container mx-auto px-8 h-full">
       <BaseIcon class="sm:hidden" iconName="fa-bars" @click="toggleSideMenu" />
       <RouterLink class="hidden sm:block" to="/">
@@ -20,10 +22,17 @@
           ></path>
         </svg>
       </RouterLink>
-      <nav class="categories hidden sm:flex sm:flex-wrap sm:justify-center sm:uppercase sm:text-sm md:text-base">
-        <RouterLink class="p-2 hover:bg-rose-quartz" v-for="category in categories" :key="category"
-          :to="{name: 'product-list', params: {'category_name': category}}">
-          {{category}}
+      <nav
+        class="categories hidden sm:flex sm:flex-wrap sm:justify-center sm:uppercase sm:text-sm md:text-base"
+      >
+        <RouterLink
+          class="p-2 hover:bg-rose-quartz"
+          activeClass="bg-rose-quartz"
+          v-for="category in categories"
+          :key="category"
+          :to="{ name: 'product-list', params: { category_name: category } }"
+        >
+          {{ category }}
         </RouterLink>
       </nav>
       <nav>
