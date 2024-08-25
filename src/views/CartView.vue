@@ -12,6 +12,8 @@
       </div>
       <button class='bg-cyan-300 p-4' @click="this.cartItems.push({ productId: this.cartItems.length + 1, name: 'Product ' + (this.cartItems.length + 1)})">Add to cart</button>
     </div>
+
+    <CartItem v-for="item in cartItems" :key="item.id" :name="item.name" />
   </div>
 </template>
 
@@ -19,7 +21,12 @@
 import { mapState } from 'pinia';
 import { useCartStore } from '../stores/cart';
 
+import CartItem from './CartItem.vue';
+
 export default {
+  components: {
+    CartItem
+  },
   created() {
     console.log('cart', this.cartItems)
   },

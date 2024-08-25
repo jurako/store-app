@@ -16,6 +16,7 @@
           <p class="text-green-500 font-semibold text-base">{{ discountLabel }}</p>
         </template>
       </div>
+      <div class="flex justify-between"></div>
     </div>
   </div>
 </template>
