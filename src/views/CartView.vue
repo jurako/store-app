@@ -1,6 +1,6 @@
 <template>
-  <div class="grow sm:grow-0 flex flex-col p-8 border rounded-md bg-white shadow">
-    <div class="flex flex-wrap justify-between items-center gap-y-4">
+  <div class="w-96 p-8 border rounded-xl bg-white shadow">
+    <div class="flex flex-wrap justify-between items-center gap-y-4 mb-4">
       <h1 class="text-3xl font-bold">Shopping cart</h1>
       <span class="font-semibold text-gray-500">{{ this.cartItems.length }} items</span>
       <div class="w-full">
@@ -10,10 +10,10 @@
           <option value="amount">amount</option>
         </select>
       </div>
-      <button class='bg-cyan-300 p-4' @click="this.cartItems.push({ productId: this.cartItems.length + 1, name: 'Product ' + (this.cartItems.length + 1)})">Add to cart</button>
+      <!-- <button class='bg-cyan-300 p-4' @click="this.cartItems.push({ productId: this.cartItems.length + 1, name: 'Product ' + (this.cartItems.length + 1)})">Add to cart</button> -->
     </div>
 
-    <CartItem v-for="item in cartItems" :key="item.id" :name="item.name" />
+    <CartItem v-for="item in cartItems" :key="item.id" :item="item" />
   </div>
 </template>
 
@@ -21,7 +21,7 @@
 import { mapState } from 'pinia';
 import { useCartStore } from '../stores/cart';
 
-import CartItem from './CartItem.vue';
+import CartItem from '../components/CartItem.vue';
 
 export default {
   components: {
