@@ -35,6 +35,12 @@ export default {
     imageSrc() {
       //TO DO: return a default image if product has noone
       // return this.product.images.length ? this.product.images.pop() : //default image
+
+
+      //https://api.escuelajs.co/
+      // return this.product.images[this.product.image.length-1]
+
+      //https://fakestoreapi.com/
       return this.product.image
     },
     price() {
