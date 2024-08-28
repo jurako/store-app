@@ -36,7 +36,6 @@ export default {
       //TO DO: return a default image if product has noone
       // return this.product.images.length ? this.product.images.pop() : //default image
 
-
       //https://api.escuelajs.co/
       // return this.product.images[this.product.image.length-1]
 

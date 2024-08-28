@@ -10,18 +10,24 @@
           <option value="amount">amount</option>
         </select>
       </div>
-      <!-- <button class='bg-cyan-300 p-4' @click="this.cartItems.push({ productId: this.cartItems.length + 1, name: 'Product ' + (this.cartItems.length + 1)})">Add to cart</button> -->
     </div>
 
-    <CartItem v-for="item in cartItems" :key="item.id" :item="item" />
+    <CartItem
+      v-for="(item, index) in cartItems"
+      :key="item.id"
+      :item="item"
+      @add-quantity="addQuantity(index)"
+      @sub-quantity="subQuantity(index)"
+      @update-quantity="(value) => updateQuantity(value, index)"
+    />
   </div>
 </template>
 
 <script>
-import { mapState } from 'pinia';
-import { useCartStore } from '../stores/cart';
+import { mapWritableState } from 'pinia'
+import { useCartStore } from '../stores/cart'
 
-import CartItem from '../components/CartItem.vue';
+import CartItem from '../components/CartItem.vue'
 
 export default {
   components: {
@@ -31,7 +37,20 @@ export default {
     console.log('cart', this.cartItems)
   },
   computed: {
-    ...mapState(useCartStore, {cartItems: 'items'})
+    ...mapWritableState(useCartStore, { cartItems: 'items' })
+  },
+  methods: {
+    addQuantity(index) {
+      this.cartItems[index].quantity++
+    },
+    subQuantity(index) {
+      this.cartItems[index].quantity--
+    },
+    updateQuantity(value, index) {
+      //to trigger input element update in cases when the old and new values are equal
+      this.cartItems[index].quantity = null;
+      this.cartItems[index].quantity = value;
+    }
   }
 }
 </script>
