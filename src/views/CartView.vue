@@ -48,8 +48,8 @@ export default {
     },
     updateQuantity(value, index) {
       //to trigger input element update in cases when the old and new values are equal
-      this.cartItems[index].quantity = null;
-      this.cartItems[index].quantity = value;
+      this.cartItems[index].quantity = null
+      this.cartItems[index].quantity = value
     }
   }
 }
