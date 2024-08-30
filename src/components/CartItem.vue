@@ -1,10 +1,8 @@
 <template>
   <div class="cart-item">
     <img class="h-96 w-full object-contain object-center" :src="item.image" :alt="item.title" />
-    <div class="space-y-2 my-4">
-      <p class="text-sm capitalize text-gray-500">{{ item.category }}</p>
-      <p class="text-sm">{{ item.title }}</p>
-    </div>
+    <p class="my-4 text-sm capitalize text-gray-500">{{ item.category }}</p>
+    <h1 class="text-sm mb-4">{{ item.title }}</h1>
     <div class="flex justify-center items-center gap-x-3 mb-4">
       <BaseIcon class="text-xl font-semibold text-tealish-blue hover:cursor-pointer" iconName="fa-plus" @click="addQuantity" />
       <input
@@ -15,9 +13,9 @@
       />
       <BaseIcon class="text-xl font-semibold text-tealish-blue hover:cursor-pointer" iconName="fa-minus" @click="subQuantity" />
     </div>
-    <div class="flex justify-between">
+    <div class="flex justify-between items-center">
       <span>{{ APICurrency + ' ' + item.price.toFixed(2) }}</span>
-      <button></button>
+      <BaseIcon icon="fa-xmark" @click="removeItem" />
     </div>
   </div>
 </template>
@@ -40,6 +38,9 @@ export default {
     updateQuantity(event) {
       let validatedValue = Math.abs(parseInt(event.target.value))
       this.$emit('updateQuantity', validatedValue ? validatedValue : 1)
+    },
+    removeItem() {
+      this.$emit('removeItem');
     }
   }
 }

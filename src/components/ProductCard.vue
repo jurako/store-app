@@ -6,7 +6,7 @@
       alt="Product image"
     />
     <div class="space-y-4 p-4 pt-6">
-      <p class="text-lg font-bold leading-6 truncate">{{ product.title }}</p>
+      <h1 class="text-lg font-bold leading-6 truncate">{{ product.title }}</h1>
       <p class="text-base truncate">{{ product.description }}</p>
       <div class="flex items-center">
         <p class="text-lg font-medium" v-if="!product.discount">{{ currency + price }}</p>
