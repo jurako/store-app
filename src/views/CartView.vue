@@ -1,6 +1,6 @@
 <template>
-  <div class="w-96 p-8 border rounded-xl bg-white shadow">
-    <div class="flex flex-wrap justify-between items-center gap-y-4 mb-4">
+  <div class="w-96 rounded-xl border bg-white p-8 shadow">
+    <div class="mb-4 flex flex-wrap items-center justify-between gap-y-4">
       <h1 class="text-3xl font-bold">Shopping cart</h1>
       <span class="font-semibold text-gray-500">{{ this.cartItems.length }} items</span>
       <div class="w-full">
@@ -53,7 +53,7 @@ export default {
       this.cartItems[index].quantity = value
     },
     removeItem(index) {
-      this.cartItems.splice(index, 1);
+      this.cartItems.splice(index, 1)
     }
   }
 }

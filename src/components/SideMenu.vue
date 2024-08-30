@@ -2,20 +2,20 @@
   <div>
     <Transition name="fade" v-show="isVisible">
       <div
-        class="fixed top-0 left-0 bottom-0 right-0 backdrop-blur-sm transition-display"
+        class="transition-display fixed bottom-0 left-0 right-0 top-0 backdrop-blur-sm"
         v-show="isVisible"
         @click="$emit('toggle')"
       ></div>
     </Transition>
     <Transition name="slide">
       <div
-        class="side-menu h-screen p-4 w-64 absolute top-0 left-0 bg-celadon-light"
+        class="side-menu absolute left-0 top-0 h-screen w-64 bg-celadon-light p-4"
         v-show="isVisible"
         @click="emitToggleCheckTarget"
       >
         <Transition name="fade">
           <div
-            class="flex justify-center items-center h-14 w-14 absolute top-2 -right-16 border-2 border-rose-quartz rounded-full hover:bg-rose-quartz hover:cursor-pointer"
+            class="absolute -right-16 top-2 flex h-14 w-14 items-center justify-center rounded-full border-2 border-rose-quartz hover:cursor-pointer hover:bg-rose-quartz"
             v-show="isVisible"
           >
             <BaseIcon iconName="fa-xmark" size="2x" />
@@ -39,7 +39,7 @@
             ></path>
           </svg>
         </RouterLink>
-        <nav class="flex flex-col mt-2 gap-y-2 uppercase text-center hover:cursor-pointer">
+        <nav class="mt-2 flex flex-col gap-y-2 text-center uppercase hover:cursor-pointer">
           <RouterLink
             class="hover:bg-rose-quartz"
             activeClass="bg-rose-quartz"

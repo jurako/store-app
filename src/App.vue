@@ -1,6 +1,6 @@
 <template>
   <HeaderView />
-  <main class="flex flex-wrap justify-center items-center gap-8 mt-16 sm:mt-0 p-5">
+  <main class="mt-16 flex flex-wrap items-center justify-center gap-8 p-5 sm:mt-0">
     <RouterView />
   </main>
 </template>

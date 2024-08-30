@@ -1,19 +1,19 @@
 <template>
-  <div class="w-72 bg-white rounded-xl shadow duration-300 hover:scale-105">
+  <div class="w-72 rounded-xl bg-white shadow duration-300 hover:scale-105">
     <img
-      class="object-contain object-center w-4/5 h-80 mx-auto mt-4 rounded-t-xl"
+      class="mx-auto mt-4 h-80 w-4/5 rounded-t-xl object-contain object-center"
       :src="imageSrc"
       alt="Product image"
     />
     <div class="space-y-4 p-4 pt-6">
-      <h1 class="text-lg font-bold leading-6 truncate">{{ product.title }}</h1>
-      <p class="text-base truncate">{{ product.description }}</p>
+      <h1 class="truncate text-lg font-bold leading-6">{{ product.title }}</h1>
+      <p class="truncate text-base">{{ product.description }}</p>
       <div class="flex items-center">
         <p class="text-lg font-medium" v-if="!product.discount">{{ currency + price }}</p>
         <template v-else>
           <p class="mr-2 text-lg font-medium">{{ currency + priceWithDiscount }}</p>
-          <p class="mr-auto text-gray-500 text-base line-through">{{ currency + price }}</p>
-          <p class="text-green-500 font-semibold text-base">{{ discountLabel }}</p>
+          <p class="mr-auto text-base text-gray-500 line-through">{{ currency + price }}</p>
+          <p class="text-base font-semibold text-green-500">{{ discountLabel }}</p>
         </template>
       </div>
       <div class="flex justify-between"></div>
