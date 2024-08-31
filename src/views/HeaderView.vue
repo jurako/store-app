@@ -4,7 +4,7 @@
   >
     <div class="container mx-auto flex h-full items-center justify-between gap-x-28 px-8">
       <BaseIcon class="sm:hidden" iconName="fa-bars" @click="toggleSideMenu" />
-      <RouterLink class="hidden sm:block" to="/">
+      <RouterLink class="hidden sm:block" :to="{ name: 'home' }">
         <svg
           id="logo-85"
           width="40"
@@ -36,7 +36,7 @@
         </RouterLink>
       </nav>
       <nav>
-        <RouterLink to="/cart">
+        <RouterLink :to="{name: 'cart'}">
           <BaseIcon iconName="fa-cart-shopping" />
         </RouterLink>
       </nav>

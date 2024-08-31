@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <Transition name="fade" v-show="isVisible">
+  <aside class="sm:hidden">
+    <Transition name="fade">
       <div
-        class="transition-display fixed bottom-0 left-0 right-0 top-0 backdrop-blur-sm"
+        class="fixed bottom-0 left-0 right-0 top-0 bg-backdrop opacity-50"
         v-show="isVisible"
         @click="$emit('toggle')"
       ></div>
@@ -13,15 +13,7 @@
         v-show="isVisible"
         @click="emitToggleCheckTarget"
       >
-        <Transition name="fade">
-          <div
-            class="absolute -right-16 top-2 flex h-14 w-14 items-center justify-center rounded-full border-2 border-rose-quartz hover:cursor-pointer hover:bg-rose-quartz"
-            v-show="isVisible"
-          >
-            <BaseIcon iconName="fa-xmark" size="2x" />
-          </div>
-        </Transition>
-        <RouterLink class="inline-block" to="/">
+        <RouterLink class="inline-block" :to="{ name: 'home' }">
           <svg
             id="logo-85"
             width="40"
@@ -45,14 +37,14 @@
             activeClass="bg-rose-quartz"
             v-for="category in categories"
             :key="category"
-            :to="'/categories/' + category"
+            :to="{ name: 'product-list', params: { category_name: category } }"
           >
             {{ category }}
           </RouterLink>
         </nav>
       </div>
     </Transition>
-  </div>
+  </aside>
 </template>
 
 <script>
@@ -61,6 +53,9 @@ import BaseIcon from './BaseIcon.vue'
 export default {
   components: { BaseIcon },
   props: ['isVisible', 'categories'],
+  created() {
+    console.log('Is created')
+  },
   methods: {
     emitToggleCheckTarget(event) {
       if (!event.target.classList.contains('side-menu')) {
@@ -72,31 +67,28 @@ export default {
 </script>
 
 <style scoped>
-.slide-leave-to,
-.slide-enter-from {
-  transform: translateX(-100%);
+.slide-enter-from,
+.slide-leave-to {
+  transform: translate(-100%);
 }
-.slide-leave-from,
-.slide-enter-to {
-  transform: translateX(0%);
+.slide-enter-to,
+.slide-leave-from {
+  transform: translate(0);
 }
 .slide-enter-active,
 .slide-leave-active {
-  transition: transform 0.5s;
+  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.fade-leave-to,
-.fade-enter-from {
+.fade-enter-from,
+.fade-leave-to {
+  background-color: transparent;
   opacity: 0;
 }
-.fade-leave-from,
-.fade-enter-to {
-  opacity: 1;
-}
-.fade-enter-active {
-  transition: opacity 1s;
-}
+.fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s;
+  transition:
+    opacity 0.5s ease,
+    background-color 0.5s ease;
 }
 </style>

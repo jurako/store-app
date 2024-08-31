@@ -1,16 +1,24 @@
 <template>
-  <div class="cart-item">
-    <img class="h-96 w-full object-contain object-center" :src="item.image" :alt="item.title" />
-    <p class="my-4 text-sm capitalize text-gray-500">{{ item.category }}</p>
-    <h1 class="mb-4 text-sm">{{ item.title }}</h1>
-    <div class="mb-4 flex items-center justify-center gap-x-3">
+  <div
+    class="flex-column cart-item mb-5 border-t-2 border-t-gray-200 pt-3 sm:flex sm:items-center sm:gap-x-8"
+  >
+    <img
+      class="h-96 w-full object-contain object-center sm:h-28 sm:w-16"
+      :src="item.image"
+      :alt="item.title"
+    />
+    <div class="sm:w-1/4">
+      <p class="my-4 text-sm capitalize text-gray-500">{{ item.category }}</p>
+      <h1 class="mb-4 text-sm">{{ item.title }}</h1>
+    </div>
+    <div class="mb-4 flex items-center justify-center gap-x-3 sm:mb-0">
       <BaseIcon
         class="text-xl font-semibold text-tealish-blue hover:cursor-pointer"
         iconName="fa-plus"
         @click="addQuantity"
       />
       <input
-        class="rounded-md border-gray-200"
+        class="rounded-md border-gray-200 sm:w-16"
         type="text"
         :value="item.quantity"
         @input="updateQuantity($event)"
@@ -21,7 +29,7 @@
         @click="subQuantity"
       />
     </div>
-    <div class="flex items-center justify-between">
+    <div class="flex items-center justify-between sm:flex-grow">
       <span>{{ APICurrency + ' ' + item.price.toFixed(2) }}</span>
       <BaseIcon icon="fa-xmark" @click="removeItem" />
     </div>
