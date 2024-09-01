@@ -101,7 +101,9 @@ export const useCartStore = defineStore('cart', {
       this.items[index].quantity++
     },
     subQuantity(index) {
-      this.items[index].quantity--
+      if (this.items[index].quantity > 1) {
+        this.items[index].quantity--
+      }
     }
   }
 })

@@ -2,31 +2,29 @@
   <input
     class="rounded-md border-gray-200 sm:w-16"
     type="text"
-    v-model="storeCart.items[index].quantity"
+    v-model.number="storeCart.items[index].quantity"
     @keydown="validateInput"
+    @blur="checkIfEmpty"
   />
 </template>
 
 <script setup>
 import { useCartStore } from '@/stores/cart'
 
-defineProps(['index'])
+const props = defineProps(['index'])
 const storeCart = useCartStore()
 
 function validateInput(event) {
-  console.log('test 1', event.key)
-  let isKeyboardShortcut = event.ctrlKey && ['a', 'c', 'v'].includes(event.key)
-  console.log('test 2', event.ctrlKey)
-  console.log('test 3', event.key)
-  console.log('test 4', event.key.length)
-  console.log('test 5', isKeyboardShortcut)
-  console.log('test 6', Number(event.key))
-  console.log('test 7', Math.abs(Number(event.key)))
-  console.log('test 8', isNaN(Math.abs(Number(event.key))))
-  if (!isKeyboardShortcut && event.key.length == 1 && isNaN(Math.abs(Number(event.key)))) {
-    console.log('Event prevented')
+  let isKeyboardShortcut = event.ctrlKey && ['a', 'z', 'x', 'c', 'v'].includes(event.key)
+  let isNumber = /^\d+$/.test(event.key)
+  if (event.key.length == 1 && !isNumber && !isKeyboardShortcut) {
     event.preventDefault()
   }
-  console.log('--------------------------------------------------------')
+}
+
+function checkIfEmpty(event) {
+  if (!event.target.value) {
+    storeCart.items[props.index].quantity = 1
+  }
 }
 </script>

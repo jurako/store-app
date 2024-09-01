@@ -17,7 +17,7 @@
         iconName="fa-plus"
         @click="storeCart.addQuantity(index)"
       />
-      <CartAmount :index="index"/>
+      <CartAmount :index="index" />
       <BaseIcon
         class="text-xl font-semibold text-tealish-blue hover:cursor-pointer"
         iconName="fa-minus"
@@ -38,8 +38,7 @@ import { useCartStore } from '@/stores/cart'
 import BaseIcon from '@/components/BaseIcon.vue'
 import CartAmount from '@/components/CartAmount.vue'
 
-const APICurrency = inject('APICurrency');
-const storeCart = useCartStore();
-defineProps(['index']);
-
+const APICurrency = inject('APICurrency')
+const storeCart = useCartStore()
+defineProps(['index'])
 </script>
