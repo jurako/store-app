@@ -17,12 +17,7 @@
         iconName="fa-plus"
         @click="addQuantity"
       />
-      <input
-        class="rounded-md border-gray-200 sm:w-16"
-        type="text"
-        :value="item.quantity"
-        @input="updateQuantity($event)"
-      />
+      <!-- <CartAmount/> -->
       <BaseIcon
         class="text-xl font-semibold text-tealish-blue hover:cursor-pointer"
         iconName="fa-minus"
@@ -38,11 +33,12 @@
 
 <script>
 import BaseIcon from './BaseIcon.vue'
+import CartAmount from './CartAmount.vue'
 
 export default {
-  components: { BaseIcon },
+  components: { BaseIcon, CartAmount },
   props: ['item'],
-  emits: ['addQuantity', 'subQuantity', 'updateQuantity'],
+  emits: ['addQuantity', 'subQuantity', 'removeItem'],
   inject: ['APICurrency'],
   methods: {
     addQuantity() {
@@ -51,13 +47,10 @@ export default {
     subQuantity() {
       if (this.item.quantity > 1) this.$emit('subQuantity')
     },
-    updateQuantity(event) {
-      let validatedValue = Math.abs(parseInt(event.target.value))
-      this.$emit('updateQuantity', validatedValue ? validatedValue : 1)
-    },
     removeItem() {
       this.$emit('removeItem')
-    }
+    },
+
   }
 }
 </script>

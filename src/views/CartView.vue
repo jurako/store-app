@@ -16,9 +16,9 @@
       v-for="(item, index) in cartItems"
       :key="item.id"
       :item="item"
+      v-model="item.quantity"
       @add-quantity="addQuantity(index)"
       @sub-quantity="subQuantity(index)"
-      @update-quantity="(value) => updateQuantity(value, index)"
       @remove-item="removeItem(index)"
     />
 
@@ -55,11 +55,6 @@ export default {
     },
     subQuantity(index) {
       this.cartItems[index].quantity--
-    },
-    updateQuantity(value, index) {
-      //to trigger input element update in cases when the old and new values are equal
-      this.cartItems[index].quantity = null
-      this.cartItems[index].quantity = value
     },
     removeItem(index) {
       this.cartItems.splice(index, 1)
