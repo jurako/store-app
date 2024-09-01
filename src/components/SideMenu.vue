@@ -34,7 +34,7 @@
 
 <script>
 import BaseIcon from './BaseIcon.vue'
-import LogoSvg from './LogoSvg.vue';
+import LogoSvg from './LogoSvg.vue'
 
 export default {
   components: { BaseIcon, LogoSvg },

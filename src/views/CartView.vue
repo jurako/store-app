@@ -2,7 +2,7 @@
   <div class="cart w-96 rounded-xl border bg-white p-8 shadow sm:w-full">
     <div class="mb-4 flex flex-wrap items-center justify-between gap-y-4">
       <h1 class="text-3xl font-bold">Shopping cart</h1>
-      <span class="font-semibold text-gray-500">{{ this.cartItems.length }} items</span>
+      <span class="font-semibold text-gray-500">{{ storeCart.items.length }} items</span>
       <div class="w-full">
         Sort by:
         <select class="border-0">
@@ -12,15 +12,7 @@
       </div>
     </div>
 
-    <CartItem
-      v-for="(item, index) in cartItems"
-      :key="item.id"
-      :item="item"
-      v-model="item.quantity"
-      @add-quantity="addQuantity(index)"
-      @sub-quantity="subQuantity(index)"
-      @remove-item="removeItem(index)"
-    />
+    <CartItem v-for="(item, index) in storeCart.items" :key="item.id" :index="index" />
 
     <hr class="border-t-2 border-gray-200" />
 
@@ -31,34 +23,10 @@
   </div>
 </template>
 
-<script>
-import { mapWritableState } from 'pinia'
-import { useCartStore } from '../stores/cart'
+<script setup>
+import CartItem from '@/components/CartItem.vue'
+import BaseIcon from '@/components/BaseIcon.vue'
 
-import CartItem from '../components/CartItem.vue'
-import BaseIcon from '../components/BaseIcon.vue'
-
-export default {
-  components: {
-    CartItem,
-    BaseIcon
-  },
-  created() {
-    console.log('cart', this.cartItems)
-  },
-  computed: {
-    ...mapWritableState(useCartStore, { cartItems: 'items' })
-  },
-  methods: {
-    addQuantity(index) {
-      this.cartItems[index].quantity++
-    },
-    subQuantity(index) {
-      this.cartItems[index].quantity--
-    },
-    removeItem(index) {
-      this.cartItems.splice(index, 1)
-    }
-  }
-}
+import { useCartStore } from '@/stores/cart'
+const storeCart = useCartStore()
 </script>

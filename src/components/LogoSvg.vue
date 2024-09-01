@@ -17,7 +17,7 @@
 </template>
 
 <style scoped>
-    path {
-        fill: #627264;
-    }
+path {
+  fill: #627264;
+}
 </style>

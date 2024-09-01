@@ -4,53 +4,42 @@
   >
     <img
       class="h-96 w-full object-contain object-center sm:h-28 sm:w-16"
-      :src="item.image"
-      :alt="item.title"
+      :src="storeCart.items[index].image"
+      :alt="storeCart.items[index].title"
     />
     <div class="sm:w-1/4">
-      <p class="my-4 text-sm capitalize text-gray-500">{{ item.category }}</p>
-      <h1 class="mb-4 text-sm">{{ item.title }}</h1>
+      <p class="my-4 text-sm capitalize text-gray-500">{{ storeCart.items[index].category }}</p>
+      <h1 class="mb-4 text-sm">{{ storeCart.items[index].title }}</h1>
     </div>
     <div class="mb-4 flex items-center justify-center gap-x-3 sm:mb-0">
       <BaseIcon
         class="text-xl font-semibold text-tealish-blue hover:cursor-pointer"
         iconName="fa-plus"
-        @click="addQuantity"
+        @click="storeCart.addQuantity(index)"
       />
-      <!-- <CartAmount/> -->
+      <CartAmount :index="index"/>
       <BaseIcon
         class="text-xl font-semibold text-tealish-blue hover:cursor-pointer"
         iconName="fa-minus"
-        @click="subQuantity"
+        @click="storeCart.subQuantity(index)"
       />
     </div>
     <div class="flex items-center justify-between sm:flex-grow">
-      <span>{{ APICurrency + ' ' + item.price.toFixed(2) }}</span>
-      <BaseIcon icon="fa-xmark" @click="removeItem" />
+      <span>{{ APICurrency + ' ' + storeCart.items[index].price.toFixed(2) }}</span>
+      <BaseIcon icon="fa-xmark" @click="storeCart.remove(index)" />
     </div>
   </div>
 </template>
 
-<script>
-import BaseIcon from './BaseIcon.vue'
-import CartAmount from './CartAmount.vue'
+<script setup>
+import { inject } from 'vue'
+import { useCartStore } from '@/stores/cart'
 
-export default {
-  components: { BaseIcon, CartAmount },
-  props: ['item'],
-  emits: ['addQuantity', 'subQuantity', 'removeItem'],
-  inject: ['APICurrency'],
-  methods: {
-    addQuantity() {
-      this.$emit('addQuantity')
-    },
-    subQuantity() {
-      if (this.item.quantity > 1) this.$emit('subQuantity')
-    },
-    removeItem() {
-      this.$emit('removeItem')
-    },
+import BaseIcon from '@/components/BaseIcon.vue'
+import CartAmount from '@/components/CartAmount.vue'
 
-  }
-}
+const APICurrency = inject('APICurrency');
+const storeCart = useCartStore();
+defineProps(['index']);
+
 </script>
