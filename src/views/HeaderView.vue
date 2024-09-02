@@ -30,32 +30,30 @@
   </header>
 </template>
 
-<script>
-import axios from 'axios'
-import BaseIcon from '../components/BaseIcon.vue'
-import SideMenu from '../components/SideMenu.vue'
-import LogoSvg from '../components/LogoSvg.vue'
+<script setup>
+import { ref } from 'vue'
 
-export default {
-  components: { BaseIcon, SideMenu, LogoSvg },
-  data() {
-    return {
-      categories: [],
-      showSideMenu: false
-    }
-  },
-  created() {
-    this.fetchCategories()
-  },
-  methods: {
-    fetchCategories() {
-      axios.get('/products/categories').then((response) => {
-        this.categories = response.data
-      })
-    },
-    toggleSideMenu() {
-      this.showSideMenu = !this.showSideMenu
-    }
-  }
+import axios from 'axios'
+import BaseIcon from '@/components/BaseIcon.vue'
+import SideMenu from '@/components/SideMenu.vue'
+import LogoSvg from '@/components/LogoSvg.vue'
+import { useCartStore } from '@/stores/cart'
+
+const storeCart = useCartStore();
+
+let categories = ref([]);
+let showSideMenu = ref(false);
+
+function fetchCategories() {
+  axios.get('/products/categories').then((response) => {
+    categories.value = response.data
+  })
 }
+
+function toggleSideMenu() {
+  showSideMenu = !showSideMenu
+}
+
+fetchCategories();
+
 </script>
