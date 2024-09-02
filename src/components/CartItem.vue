@@ -17,7 +17,7 @@
         iconName="fa-plus"
         @click="storeCart.addQuantity(index)"
       />
-      <CartAmountField :index="index" />
+      <AmountField v-model="storeCart.items[index].quantity" />
       <BaseIcon
         class="text-xl font-semibold text-tealish-blue hover:cursor-pointer"
         iconName="fa-minus"
@@ -36,7 +36,7 @@ import { inject } from 'vue'
 import { useCartStore } from '@/stores/cart'
 
 import BaseIcon from '@/components/BaseIcon.vue'
-import CartAmountField from '@/components/CartAmountField.vue'
+import AmountField from '@/components/AmountField.vue'
 
 const APICurrency = inject('APICurrency')
 const storeCart = useCartStore()

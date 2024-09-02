@@ -2,17 +2,17 @@
   <input
     class="rounded-md border-gray-200 sm:w-16"
     type="text"
-    v-model.number="storeCart.items[index].quantity"
+    :value="modelValue"
+    @input="$emit('update:modelValue', $event.target.value)"
     @keydown="validateInput"
     @blur="checkIfEmpty"
   />
 </template>
 
 <script setup>
-import { useCartStore } from '@/stores/cart'
 
-const props = defineProps(['index'])
-const storeCart = useCartStore()
+const emit = defineEmits(['update:modelValue'])
+const props = defineProps(['modelValue'])
 
 function validateInput(event) {
   let isKeyboardShortcut = event.ctrlKey && ['a', 'z', 'x', 'c', 'v'].includes(event.key)
@@ -24,7 +24,7 @@ function validateInput(event) {
 
 function checkIfEmpty(event) {
   if (!event.target.value) {
-    storeCart.items[props.index].quantity = 1
+    emit('update:modelValue', 1);
   }
 }
 </script>

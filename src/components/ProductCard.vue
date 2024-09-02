@@ -17,7 +17,7 @@
         </template>
       </div>
       <div class="flex justify-between">
-        <h2>Add to cart</h2>
+        <AmountField />
       </div>
     </div>
   </article>
@@ -26,6 +26,7 @@
 <script setup>
 import { inject, computed } from 'vue'
 import { useCartStore } from '@/stores/cart';
+import AmountField from '@/components/AmountField.vue';
 
 const props = defineProps(['product']);
 const currency = inject(['APICurrency']);
@@ -36,37 +37,3 @@ const priceWithDiscount = computed(() => (props.product.price - (props.product.p
 const discountLabel = computed(() => props.product.discount.toFixed(2) + '% off' );
 
 </script>
-
-<!-- <script>
-export default {
-  props: {
-    product: Object
-  },
-  inject: {
-    currency: {
-      from: 'APICurrency'
-    }
-  },
-  computed: {
-    imageSrc() {
-      //TO DO: return a default image if product has noone
-      // return this.product.images.length ? this.product.images.pop() : //default image
-
-      //https://api.escuelajs.co/
-      // return this.product.images[this.product.image.length-1]
-
-      //https://fakestoreapi.com/
-      return this.product.image
-    },
-    price() {
-      return this.product.price.toFixed(2)
-    },
-    priceWithDiscount() {
-      return (this.product.price - (this.product.price * this.product.discount) / 100).toFixed(2)
-    },
-    discountLabel() {
-      return this.product.discount.toFixed(2) + '% off'
-    }
-  }
-}
-</script> -->
