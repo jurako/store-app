@@ -10,7 +10,6 @@
 </template>
 
 <script setup>
-
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps(['modelValue'])
 
@@ -24,7 +23,7 @@ function validateInput(event) {
 
 function checkIfEmpty(event) {
   if (!event.target.value) {
-    emit('update:modelValue', 1);
+    emit('update:modelValue', 1)
   }
 }
 </script>

@@ -25,15 +25,16 @@
 
 <script setup>
 import { inject, computed } from 'vue'
-import { useCartStore } from '@/stores/cart';
-import AmountField from '@/components/AmountField.vue';
+import { useCartStore } from '@/stores/cart'
+import AmountField from '@/components/AmountField.vue'
 
-const props = defineProps(['product']);
-const currency = inject(['APICurrency']);
+const props = defineProps(['product'])
+const currency = inject(['APICurrency'])
 
-const imageSrc = computed(() => props.product.image );
-const price = computed(() => props.product.price.toFixed(2) );
-const priceWithDiscount = computed(() => (props.product.price - (props.product.price * props.product.discount) / 100).toFixed(2) );
-const discountLabel = computed(() => props.product.discount.toFixed(2) + '% off' );
-
+const imageSrc = computed(() => props.product.image)
+const price = computed(() => props.product.price.toFixed(2))
+const priceWithDiscount = computed(() =>
+  (props.product.price - (props.product.price * props.product.discount) / 100).toFixed(2)
+)
+const discountLabel = computed(() => props.product.discount.toFixed(2) + '% off')
 </script>

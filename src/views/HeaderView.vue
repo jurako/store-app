@@ -39,10 +39,10 @@ import SideMenu from '@/components/SideMenu.vue'
 import LogoSvg from '@/components/LogoSvg.vue'
 import { useCartStore } from '@/stores/cart'
 
-const storeCart = useCartStore();
+const storeCart = useCartStore()
 
-let categories = ref([]);
-let showSideMenu = ref(false);
+let categories = ref([])
+let showSideMenu = ref(false)
 
 function fetchCategories() {
   axios.get('/products/categories').then((response) => {
@@ -54,6 +54,5 @@ function toggleSideMenu() {
   showSideMenu = !showSideMenu
 }
 
-fetchCategories();
-
+fetchCategories()
 </script>
