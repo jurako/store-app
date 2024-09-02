@@ -1,5 +1,5 @@
 <template>
-  <div class="w-72 rounded-xl bg-white shadow duration-300 hover:scale-105">
+  <article class="w-72 rounded-xl bg-white shadow duration-300 hover:scale-105">
     <img
       class="mx-auto mt-4 h-80 w-4/5 rounded-t-xl object-contain object-center"
       :src="imageSrc"
@@ -16,12 +16,28 @@
           <p class="text-base font-semibold text-green-500">{{ discountLabel }}</p>
         </template>
       </div>
-      <div class="flex justify-between"></div>
+      <div class="flex justify-between">
+        <h2>Add to cart</h2>
+      </div>
     </div>
-  </div>
+  </article>
 </template>
 
-<script>
+<script setup>
+import { inject, computed } from 'vue'
+import { useCartStore } from '@/stores/cart';
+
+const props = defineProps(['product']);
+const currency = inject(['APICurrency']);
+
+const imageSrc = computed(() => props.product.image );
+const price = computed(() => props.product.price.toFixed(2) );
+const priceWithDiscount = computed(() => (props.product.price - (props.product.price * props.product.discount) / 100).toFixed(2) );
+const discountLabel = computed(() => props.product.discount.toFixed(2) + '% off' );
+
+</script>
+
+<!-- <script>
 export default {
   props: {
     product: Object
@@ -53,4 +69,4 @@ export default {
     }
   }
 }
-</script>
+</script> -->
