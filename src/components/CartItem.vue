@@ -11,19 +11,7 @@
       <p class="my-4 text-sm capitalize text-gray-500">{{ storeCart.items[index].category }}</p>
       <h1 class="mb-4 text-sm">{{ storeCart.items[index].title }}</h1>
     </div>
-    <div class="mb-4 flex items-center justify-center gap-x-3 sm:mb-0">
-      <BaseIcon
-        class="text-xl font-semibold text-tealish-blue hover:cursor-pointer"
-        iconName="fa-plus"
-        @click="storeCart.addQuantity(index)"
-      />
-      <AmountField v-model="storeCart.items[index].quantity" />
-      <BaseIcon
-        class="text-xl font-semibold text-tealish-blue hover:cursor-pointer"
-        iconName="fa-minus"
-        @click="storeCart.subQuantity(index)"
-      />
-    </div>
+    <AmountField class="mb-4 sm:mb-0"v-model="storeCart.items[index].quantity" />
     <div class="flex items-center justify-between sm:flex-grow">
       <span>{{ APICurrency + ' ' + storeCart.items[index].price.toFixed(2) }}</span>
       <BaseIcon icon="fa-xmark" @click="storeCart.remove(index)" />
@@ -35,7 +23,6 @@
 import { inject } from 'vue'
 import { useCartStore } from '@/stores/cart'
 
-import BaseIcon from '@/components/BaseIcon.vue'
 import AmountField from '@/components/AmountField.vue'
 
 const APICurrency = inject('APICurrency')

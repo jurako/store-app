@@ -15,6 +15,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 /* add icons to the library */
 library.add(faCartShopping, faBars, faXmark, faPlus, faMinus, faArrowLeft)
+import BaseIcon from '@/components/BaseIcon.vue'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -30,6 +31,8 @@ const app = createApp(App)
 app.use(createPinia())
 app.use(router)
 
-app.component('FontAwesomeIcon', FontAwesomeIcon)
+app
+  .component('FontAwesomeIcon', FontAwesomeIcon)
+  .component('BaseIcon', BaseIcon)
 
 app.mount('#app')

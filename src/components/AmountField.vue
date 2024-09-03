@@ -1,12 +1,24 @@
 <template>
-  <input
-    class="rounded-md border-gray-200 sm:w-16"
-    type="text"
-    :value="modelValue"
-    @input="$emit('update:modelValue', $event.target.value)"
-    @keydown="validateInput"
-    @blur="checkIfEmpty"
-  />
+  <div class="flex items-center justify-center gap-x-3">
+    <BaseIcon
+      class="text-xl font-semibold text-tealish-blue hover:cursor-pointer"
+      iconName="fa-plus"
+      @click="addQuantity"
+    />
+    <input
+      class="rounded-md border-gray-200 w-16"
+      type="text"
+      :value="modelValue"
+      @input="$emit('update:modelValue', Number($event.target.value))"
+      @keydown="validateInput"
+      @blur="checkIfEmpty"
+    />
+    <BaseIcon
+      class="text-xl font-semibold text-tealish-blue hover:cursor-pointer"
+      iconName="fa-minus"
+      @click="subQuantity"
+    />
+  </div>
 </template>
 
 <script setup>
@@ -24,6 +36,16 @@ function validateInput(event) {
 function checkIfEmpty(event) {
   if (!event.target.value) {
     emit('update:modelValue', 1)
+  }
+}
+
+function addQuantity() {
+  emit('update:modelValue', props.modelValue + 1)
+}
+
+function subQuantity() {
+  if (props.modelValue > 1) {
+    emit('update:modelValue', props.modelValue - 1)
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <article class="w-72 rounded-xl bg-white shadow duration-300 hover:scale-105">
+  <article class="w-72 rounded-xl bg-white shadow duration-300">
     <img
       class="mx-auto mt-4 h-80 w-4/5 rounded-t-xl object-contain object-center"
       :src="imageSrc"
@@ -16,20 +16,30 @@
           <p class="text-base font-semibold text-green-500">{{ discountLabel }}</p>
         </template>
       </div>
-      <div class="flex justify-between">
-        <AmountField />
+      <div class="flex items-center justify-between">
+        <AmountField v-model="quantity" class="ml-auto mr-7" />
+        <button class="w-28 bg-tealish-blue p-3 font-bold text-white transition-transform hover:scale-105" @click="storeCart.add(storeCart.createItem(product, quantity))">
+          Add
+          <BaseIcon
+            class="ml-1 inline-block text-white transition-none hover:scale-100"
+            icon="fa-cart-shopping"
+            color="white"
+          />
+        </button>
       </div>
     </div>
   </article>
 </template>
 
 <script setup>
-import { inject, computed } from 'vue'
+import { ref, inject, computed } from 'vue'
 import { useCartStore } from '@/stores/cart'
 import AmountField from '@/components/AmountField.vue'
 
+const quantity = ref(parseInt(Math.random() * (15 - 1) + 1))
 const props = defineProps(['product'])
 const currency = inject(['APICurrency'])
+const storeCart = useCartStore()
 
 const imageSrc = computed(() => props.product.image)
 const price = computed(() => props.product.price.toFixed(2))

@@ -25,7 +25,6 @@
 
 <script setup>
 import CartItem from '@/components/CartItem.vue'
-import BaseIcon from '@/components/BaseIcon.vue'
 
 import { useCartStore } from '@/stores/cart'
 const storeCart = useCartStore()

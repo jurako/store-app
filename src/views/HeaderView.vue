@@ -1,6 +1,6 @@
 <template>
   <header
-    class="fixed left-0 right-0 top-0 z-10 flex min-h-16 min-w-72 items-center bg-celadon-light sm:static"
+    class="fixed left-0 right-0 top-0 flex min-h-16 min-w-72 items-center bg-celadon-light sm:static"
   >
     <div class="container mx-auto flex h-full items-center justify-between gap-x-28 px-8">
       <BaseIcon class="sm:hidden" iconName="fa-bars" @click="toggleSideMenu" />
@@ -34,7 +34,6 @@
 import { ref } from 'vue'
 
 import axios from 'axios'
-import BaseIcon from '@/components/BaseIcon.vue'
 import SideMenu from '@/components/SideMenu.vue'
 import LogoSvg from '@/components/LogoSvg.vue'
 import { useCartStore } from '@/stores/cart'
@@ -51,7 +50,7 @@ function fetchCategories() {
 }
 
 function toggleSideMenu() {
-  showSideMenu = !showSideMenu
+  showSideMenu.value = !showSideMenu.value
 }
 
 fetchCategories()

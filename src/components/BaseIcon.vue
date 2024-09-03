@@ -1,20 +1,22 @@
 <template>
   <FontAwesomeIcon
     class="block transition-transform hover:scale-110 hover:cursor-pointer"
-    :style="{ color: '#627264' }"
-    :icon="['fa-solid', iconName].join(' ')"
+    :style="{ color }"
+    :icon="'fa-solid ' + iconName"
     :size="size"
   />
 </template>
 
-<script>
-export default {
-  props: {
-    iconName: String,
-    size: {
-      type: String,
-      default: 'lg'
-    }
+<script setup>
+defineProps({
+  iconName: String,
+  size: {
+    type: String,
+    default: 'lg'
+  },
+  color: {
+    type: String,
+    default: '#627264'
   }
-}
+})
 </script>
