@@ -16,16 +16,29 @@
           <p class="text-base font-semibold text-green-500">{{ discountLabel }}</p>
         </template>
       </div>
-      <div class="flex items-center justify-between">
-        <AmountField v-model="quantity" class="ml-auto mr-7" />
-        <button class="w-28 bg-tealish-blue p-3 font-bold text-white transition-transform hover:scale-105" @click="storeCart.add(storeCart.createItem(product, quantity))">
-          Add
-          <BaseIcon
-            class="ml-1 inline-block text-white transition-none hover:scale-100"
-            icon="fa-cart-shopping"
-            color="white"
-          />
-        </button>
+      <div class="relative">
+        <div class="flex items-center justify-between">
+          <AmountField v-model="quantity" class="ml-auto mr-7" />
+          <button
+            class="w-28 rounded-md bg-tealish-blue p-3 font-bold text-white transition-transform hover:scale-105"
+            @click="handleAddToCart(product, quantity)"
+          >
+            Add
+            <BaseIcon
+              class="ml-1 inline-block text-white transition-none hover:scale-100"
+              icon="fa-cart-shopping"
+              color="white"
+            />
+          </button>
+        </div>
+        <Transition name="fade-out">
+          <p
+            v-show="isAddedToCart"
+            class="absolute -bottom-1 -top-1 left-0 right-0 flex items-center justify-center rounded-md bg-green-500 p-3 font-bold text-white"
+          >
+            Product added to cart
+          </p>
+        </Transition>
       </div>
     </div>
   </article>
@@ -47,4 +60,31 @@ const priceWithDiscount = computed(() =>
   (props.product.price - (props.product.price * props.product.discount) / 100).toFixed(2)
 )
 const discountLabel = computed(() => props.product.discount.toFixed(2) + '% off')
+
+let isAddedToCart = ref(false)
+function handleAddToCart(product, quantity) {
+  const item = storeCart.createItem(product, quantity)
+  storeCart.add(item)
+
+  showProductAddedMsg();
+}
+
+function showProductAddedMsg() {
+  isAddedToCart.value = true
+  setTimeout(() => {
+    isAddedToCart.value = false
+  }, 3000)
+}
 </script>
+
+<style scoped>
+.fade-out-leave-from {
+  opacity: 1;
+}
+.fade-out-leave-to {
+  opacity: 0;
+}
+.fade-out-leave-active {
+  transition: opacity 0.5s ease;
+}
+</style>

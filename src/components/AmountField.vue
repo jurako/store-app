@@ -6,10 +6,12 @@
       @click="addQuantity"
     />
     <input
-      class="rounded-md border-gray-200 w-16"
+      class="w-16 rounded-md border-gray-200"
       type="text"
       :value="modelValue"
-      @input="$emit('update:modelValue', Number($event.target.value))"
+      @input="
+        $emit('update:modelValue', $event.target.value === '' ? '' : Number($event.target.value))
+      "
       @keydown="validateInput"
       @blur="checkIfEmpty"
     />

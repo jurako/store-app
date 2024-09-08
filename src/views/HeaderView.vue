@@ -20,10 +20,14 @@
           {{ category }}
         </RouterLink>
       </nav>
-      <nav>
+      <nav class="relative">
         <RouterLink :to="{ name: 'cart' }">
           <BaseIcon iconName="fa-cart-shopping" />
         </RouterLink>
+        <div
+          class="cart-amount absolute -top-3 -right-3 flex w-5 h-5 items-center justify-center rounded-full bg-tealish-blue text-xs p-1 font-semibold text-white"
+          >{{ storeCart.itemCount }}</div
+        >
       </nav>
     </div>
     <SideMenu :categories="categories" :isVisible="showSideMenu" @toggle="toggleSideMenu" />

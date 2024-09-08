@@ -11,7 +11,7 @@
       <p class="my-4 text-sm capitalize text-gray-500">{{ storeCart.items[index].category }}</p>
       <h1 class="mb-4 text-sm">{{ storeCart.items[index].title }}</h1>
     </div>
-    <AmountField class="mb-4 sm:mb-0"v-model="storeCart.items[index].quantity" />
+    <AmountField class="mb-4 sm:mb-0" v-model="storeCart.items[index].quantity" />
     <div class="flex items-center justify-between sm:flex-grow">
       <span>{{ APICurrency + ' ' + storeCart.items[index].price.toFixed(2) }}</span>
       <BaseIcon icon="fa-xmark" @click="storeCart.remove(index)" />
