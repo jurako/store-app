@@ -1,4 +1,3 @@
-import ProductCard from '@/components/ProductCard.vue'
 import { defineStore } from 'pinia'
 
 export const useCartStore = defineStore('cart', {
@@ -62,19 +61,15 @@ export const useCartStore = defineStore('cart', {
   },
   actions: {
     add(item) {
-      let index = this.items.findIndex((e) => e.id == item.id)
-      console.log('index', index)
-
-      if (index != -1) {
-        this.items[index].quantity += item.quantity
-      } else {
-        this.items.push(item)
-      }
+      this.items.push(item)
+    },
+    update(index, quantity) {
+      this.items[index].quantity += quantity
     },
     remove(index) {
       this.items.splice(index, 1)
     },
-    createItem(product, quantity) {
+    prepareItem(product, quantity) {
       let { description, rating, ...newItem } = product
       newItem.quantity = quantity
 

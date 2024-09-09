@@ -1,6 +1,6 @@
 <template>
   <header
-    class="fixed left-0 right-0 top-0 flex min-h-16 min-w-72 items-center bg-celadon-light sm:static"
+    class="fixed left-0 right-0 top-0 z-10 flex min-h-16 min-w-72 items-center bg-celadon-light sm:static"
   >
     <div class="container mx-auto flex h-full items-center justify-between gap-x-28 px-8">
       <BaseIcon class="sm:hidden" iconName="fa-bars" @click="toggleSideMenu" />
@@ -24,10 +24,14 @@
         <RouterLink :to="{ name: 'cart' }">
           <BaseIcon iconName="fa-cart-shopping" />
         </RouterLink>
-        <div
-          class="cart-amount absolute -top-3 -right-3 flex w-5 h-5 items-center justify-center rounded-full bg-tealish-blue text-xs p-1 font-semibold text-white"
-          >{{ storeCart.itemCount }}</div
+        <span
+          v-show="storeCart.itemCount"
+          class="cart-amount box-border select-none absolute -right-3 -top-3 flex h-5 w-5 items-center justify-center rounded-full text-sm bg-tealish-blue text-white"
+          :class="{ pulse: playAnimation }"
+          @animationend="playAnimation = false"
         >
+          {{ storeCart.itemCount }}
+        </span>
       </nav>
     </div>
     <SideMenu :categories="categories" :isVisible="showSideMenu" @toggle="toggleSideMenu" />
@@ -44,18 +48,46 @@ import { useCartStore } from '@/stores/cart'
 
 const storeCart = useCartStore()
 
-let categories = ref([])
-let showSideMenu = ref(false)
+let playAnimation = ref(false)
+storeCart.$onAction(action => {
+  if(action.name == 'add' || action.name == 'remove') {
+    playAnimation.value = true;
+  }
+})
 
+
+let categories = ref([])
 function fetchCategories() {
   axios.get('/products/categories').then((response) => {
     categories.value = response.data
   })
 }
+fetchCategories()
 
+
+let showSideMenu = ref(false)
 function toggleSideMenu() {
   showSideMenu.value = !showSideMenu.value
 }
 
-fetchCategories()
 </script>
+
+<style scoped>
+.pulse {
+  animation: pulse;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1.01);
+    font-weight: 400;
+  }
+  50% {
+    transform: scale(1.3);
+    font-weight: 400;
+  }
+}
+</style>

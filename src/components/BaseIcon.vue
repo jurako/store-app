@@ -1,6 +1,7 @@
 <template>
   <FontAwesomeIcon
-    class="block transition-transform hover:scale-110 hover:cursor-pointer"
+    class="block transition-transform hover:cursor-pointer"
+    :class="{'hover:scale-110': scale}"
     :style="{ color }"
     :icon="'fa-solid ' + iconName"
     :size="size"
@@ -17,6 +18,10 @@ defineProps({
   color: {
     type: String,
     default: '#627264'
+  },
+  scale: {
+    type: Boolean,
+    default: true
   }
 })
 </script>

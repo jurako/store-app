@@ -25,9 +25,10 @@
           >
             Add
             <BaseIcon
-              class="ml-1 inline-block text-white transition-none hover:scale-100"
+              class="ml-1 inline-block text-white transition-none"
               icon="fa-cart-shopping"
               color="white"
+              :scale="false"
             />
           </button>
         </div>
@@ -54,27 +55,33 @@ const props = defineProps(['product'])
 const currency = inject(['APICurrency'])
 const storeCart = useCartStore()
 
-const imageSrc = computed(() => props.product.image)
-const price = computed(() => props.product.price.toFixed(2))
-const priceWithDiscount = computed(() =>
-  (props.product.price - (props.product.price * props.product.discount) / 100).toFixed(2)
-)
-const discountLabel = computed(() => props.product.discount.toFixed(2) + '% off')
-
-let isAddedToCart = ref(false)
 function handleAddToCart(product, quantity) {
-  const item = storeCart.createItem(product, quantity)
-  storeCart.add(item)
 
-  showProductAddedMsg();
+  const index = storeCart.items.findIndex(item => item.id == product.id);
+  if(index >= 0) {
+    storeCart.update(index, quantity);
+  } else {
+    const item = storeCart.prepareItem(product, quantity)
+    storeCart.add(item)
+  }
+
+  showProductAddedMsg()
 }
 
+let isAddedToCart = ref(false)
 function showProductAddedMsg() {
   isAddedToCart.value = true
   setTimeout(() => {
     isAddedToCart.value = false
   }, 3000)
 }
+
+const imageSrc = computed(() => props.product.image)
+const price = computed(() => props.product.price.toFixed(2))
+const priceWithDiscount = computed(() =>
+  (props.product.price - (props.product.price * props.product.discount) / 100).toFixed(2)
+)
+const discountLabel = computed(() => props.product.discount.toFixed(2) + '% off')
 </script>
 
 <style scoped>
