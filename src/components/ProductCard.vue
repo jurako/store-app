@@ -19,10 +19,7 @@
       <div class="relative">
         <div class="flex items-center justify-between">
           <AmountField v-model="quantity" class="ml-auto mr-7" />
-          <button
-            class="w-28 rounded-md bg-tealish-blue p-3 font-bold text-white transition-transform hover:scale-105"
-            @click="handleAddToCart(product, quantity)"
-          >
+          <BaseButton @click="handleAddToCart(product, quantity)">
             Add
             <BaseIcon
               class="ml-1 inline-block text-white transition-none"
@@ -30,12 +27,12 @@
               color="white"
               :scale="false"
             />
-          </button>
+          </BaseButton>
         </div>
         <Transition name="fade-out">
           <p
             v-show="isAddedToCart"
-            class="absolute -bottom-1 -top-1 left-0 right-0 flex items-center justify-center rounded-md bg-green-500 p-3 font-bold text-white"
+            class="absolute bottom-0 left-0 right-0 flex items-center justify-center rounded-md bg-green-500 p-3 font-bold text-white"
           >
             Product added to cart
           </p>
@@ -49,6 +46,7 @@
 import { ref, inject, computed } from 'vue'
 import { useCartStore } from '@/stores/cart'
 import AmountField from '@/components/AmountField.vue'
+import BaseButton from '@/components/BaseButton.vue'
 
 const quantity = ref(parseInt(Math.random() * (15 - 1) + 1))
 const props = defineProps(['product'])
@@ -56,23 +54,22 @@ const currency = inject(['APICurrency'])
 const storeCart = useCartStore()
 
 function handleAddToCart(product, quantity) {
+  const index = getProductIndexInCart(product)
 
-  const index = getProductIndexInCart(product);
-
-  if(index >= 0) {
-    storeCart.updateProduct(index, quantity);
+  if (index >= 0) {
+    storeCart.updateProduct(index, quantity)
   } else {
     //prepare product for adding to cart
     const preparedProduct = storeCart.prepare(product, quantity)
 
-    storeCart.addProduct(preparedProduct)
+    storeCart.add(preparedProduct)
   }
 
   showProductAddedMsg()
 }
 
 function getProductIndexInCart(product) {
-  return storeCart.products.findIndex(productInCart => productInCart.id == product.id);
+  return storeCart.products.findIndex((productInCart) => productInCart.id == product.id)
 }
 
 let isAddedToCart = ref(false)

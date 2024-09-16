@@ -18,7 +18,7 @@
         </RouterLink>
         <nav class="mt-2 flex flex-col gap-y-2 text-center uppercase hover:cursor-pointer">
           <RouterLink
-            class="hover:bg-rose-quartz"
+            class="transition-colors hover:bg-rose-quartz"
             activeClass="bg-rose-quartz"
             v-for="category in categories"
             :key="category"
