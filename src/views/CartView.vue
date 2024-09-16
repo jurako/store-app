@@ -2,7 +2,7 @@
   <div class="cart w-96 rounded-xl border bg-white p-8 shadow sm:w-full">
     <div class="mb-4 flex flex-wrap items-center justify-between gap-y-4">
       <h1 class="text-3xl font-bold">Shopping cart</h1>
-      <span class="font-semibold text-gray-500">{{ storeCart.items.length }} items</span>
+      <span class="font-semibold text-gray-500">{{ storeCart.products.length }} items</span>
       <div class="w-full">
         Sort by:
         <select class="border-0">
@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <CartItem v-for="(item, index) in storeCart.items" :key="item.id" :index="index" />
+    <CartItem v-for="(product, index) in storeCart.products" :key="product.id" :index="index" />
 
     <hr class="border-t-2 border-gray-200" />
 

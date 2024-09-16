@@ -13,7 +13,7 @@
         $emit('update:modelValue', $event.target.value === '' ? '' : Number($event.target.value))
       "
       @keydown="validateInput"
-      @blur="checkIfEmpty"
+      @blur="setDefaultIfEmpty"
     />
     <BaseIcon
       class="text-xl font-semibold text-tealish-blue hover:cursor-pointer"
@@ -35,7 +35,9 @@ function validateInput(event) {
   }
 }
 
-function checkIfEmpty(event) {
+function setDefaultIfEmpty(event) {
+
+  //if we blur and the input is empty then set the default value of 1
   if (!event.target.value) {
     emit('update:modelValue', 1)
   }

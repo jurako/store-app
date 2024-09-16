@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 
 export const useCartStore = defineStore('cart', {
   state: () => ({
-    items: [
+    products: [
       {
         id: 9,
         title: 'WD 2TB Elements Portable External Hard Drive - USB 3.0 ',
@@ -55,25 +55,25 @@ export const useCartStore = defineStore('cart', {
     ]
   }),
   getters: {
-    itemCount() {
-      return this.items.length
+    productCount() {
+      return this.products.length
     }
   },
   actions: {
-    add(item) {
-      this.items.push(item)
+    addProduct(item) {
+      this.products.push(item)
     },
-    update(index, quantity) {
+    updateProduct(index, quantity) {
       this.items[index].quantity += quantity
     },
-    remove(index) {
-      this.items.splice(index, 1)
+    removeProduct(index) {
+      this.products.splice(index, 1)
     },
-    prepareItem(product, quantity) {
-      let { description, rating, ...newItem } = product
-      newItem.quantity = quantity
+    prepare(product, quantity) {
+      let { description, rating, ...newProduct } = product
+      newProduct.quantity = quantity
 
-      return newItem
+      return newProduct
     }
   }
 })

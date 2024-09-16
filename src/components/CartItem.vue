@@ -4,17 +4,17 @@
   >
     <img
       class="h-96 w-full object-contain object-center sm:h-28 sm:w-16"
-      :src="storeCart.items[index].image"
-      :alt="storeCart.items[index].title"
+      :src="storeCart.products[index].image"
+      :alt="storeCart.products[index].title"
     />
     <div class="sm:w-1/4">
-      <p class="my-4 text-sm capitalize text-gray-500">{{ storeCart.items[index].category }}</p>
-      <h1 class="mb-4 text-sm">{{ storeCart.items[index].title }}</h1>
+      <p class="my-4 text-sm capitalize text-gray-500">{{ storeCart.products[index].category }}</p>
+      <h1 class="mb-4 text-sm">{{ storeCart.products[index].title }}</h1>
     </div>
-    <AmountField class="mb-4 sm:mb-0" v-model="storeCart.items[index].quantity" />
+    <AmountField class="mb-4 sm:mb-0" v-model="storeCart.products[index].quantity" />
     <div class="flex items-center justify-between sm:flex-grow">
-      <span>{{ APICurrency + ' ' + storeCart.items[index].price.toFixed(2) }}</span>
-      <BaseIcon icon="fa-xmark" @click="storeCart.remove(index)" />
+      <span>{{ APICurrency + ' ' + storeCart.products[index].price.toFixed(2) }}</span>
+      <BaseIcon icon="fa-xmark" @click="storeCart.removeProduct(index)" />
     </div>
   </div>
 </template>

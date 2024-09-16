@@ -25,12 +25,12 @@
           <BaseIcon iconName="fa-cart-shopping" />
         </RouterLink>
         <span
-          v-show="storeCart.itemCount"
+          v-show="storeCart.productCount"
           class="cart-amount box-border select-none absolute -right-3 -top-3 flex h-5 w-5 items-center justify-center rounded-full text-sm bg-tealish-blue text-white"
           :class="{ pulse: playAnimation }"
           @animationend="playAnimation = false"
         >
-          {{ storeCart.itemCount }}
+          {{ storeCart.productCount }}
         </span>
       </nav>
     </div>
@@ -50,7 +50,8 @@ const storeCart = useCartStore()
 
 let playAnimation = ref(false)
 storeCart.$onAction(action => {
-  if(action.name == 'add' || action.name == 'remove') {
+  console.log('action', action);
+  if(action.name == 'addProduct' || action.name == 'removeProduct') {
     playAnimation.value = true;
   }
 })

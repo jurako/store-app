@@ -57,15 +57,22 @@ const storeCart = useCartStore()
 
 function handleAddToCart(product, quantity) {
 
-  const index = storeCart.items.findIndex(item => item.id == product.id);
+  const index = getProductIndexInCart(product);
+
   if(index >= 0) {
-    storeCart.update(index, quantity);
+    storeCart.updateProduct(index, quantity);
   } else {
-    const item = storeCart.prepareItem(product, quantity)
-    storeCart.add(item)
+    //prepare product for adding to cart
+    const preparedProduct = storeCart.prepare(product, quantity)
+
+    storeCart.addProduct(preparedProduct)
   }
 
   showProductAddedMsg()
+}
+
+function getProductIndexInCart(product) {
+  return storeCart.products.findIndex(productInCart => productInCart.id == product.id);
 }
 
 let isAddedToCart = ref(false)
