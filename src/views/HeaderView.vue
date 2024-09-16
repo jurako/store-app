@@ -20,7 +20,10 @@
           {{ category }}
         </RouterLink>
       </nav>
-      <nav class="relative">
+      <nav class="relative flex gap-x-5">
+        <RouterLink :to="{ name: 'sign-in' }">
+          <BaseIcon icon="fa-user" />
+        </RouterLink>
         <RouterLink :to="{ name: 'cart' }">
           <BaseIcon iconName="fa-cart-shopping" />
         </RouterLink>
