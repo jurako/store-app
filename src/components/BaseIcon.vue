@@ -1,7 +1,7 @@
 <template>
   <FontAwesomeIcon
     class="block transition-transform hover:cursor-pointer"
-    :class="{'hover:scale-110': scale}"
+    :class="{ 'hover:scale-110': scale }"
     :style="{ color }"
     :icon="'fa-solid ' + iconName"
     :size="size"

@@ -60,11 +60,11 @@ export const useCartStore = defineStore('cart', {
     }
   },
   actions: {
-    addProduct(item) {
-      this.products.push(item)
+    add(product) {
+      this.products.push(product)
     },
     updateProduct(index, quantity) {
-      this.items[index].quantity += quantity
+      this.products[index].quantity += quantity
     },
     removeProduct(index) {
       this.products.splice(index, 1)

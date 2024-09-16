@@ -12,7 +12,8 @@ export default {
         'celadon-light': '#B5DFCA',
         'mint-green': '#C5E7E2',
         'rose-quartz': '#AD9BAA',
-        'tealish-blue': '#2563EB',
+        'han-blue': '#3B71CA',
+        'cerulean-blue': '#3566B6',
         'backdrop': '#0009'
       }
     },

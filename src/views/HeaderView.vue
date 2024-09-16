@@ -11,7 +11,7 @@
         class="categories hidden sm:flex sm:flex-wrap sm:justify-center sm:text-sm sm:uppercase md:text-base"
       >
         <RouterLink
-          class="p-2 hover:bg-rose-quartz"
+          class="p-2 transition-colors hover:bg-rose-quartz"
           activeClass="bg-rose-quartz"
           v-for="category in categories"
           :key="category"
@@ -26,7 +26,7 @@
         </RouterLink>
         <span
           v-show="storeCart.productCount"
-          class="cart-amount box-border select-none absolute -right-3 -top-3 flex h-5 w-5 items-center justify-center rounded-full text-sm bg-tealish-blue text-white"
+          class="cart-amount absolute -right-3 -top-3 box-border flex h-5 w-5 select-none items-center justify-center rounded-full bg-han-blue text-sm text-white"
           :class="{ pulse: playAnimation }"
           @animationend="playAnimation = false"
         >
@@ -49,13 +49,12 @@ import { useCartStore } from '@/stores/cart'
 const storeCart = useCartStore()
 
 let playAnimation = ref(false)
-storeCart.$onAction(action => {
-  console.log('action', action);
-  if(action.name == 'addProduct' || action.name == 'removeProduct') {
-    playAnimation.value = true;
+storeCart.$onAction((action) => {
+  console.log('action', action)
+  if (action.name == 'addProduct' || action.name == 'removeProduct') {
+    playAnimation.value = true
   }
 })
-
 
 let categories = ref([])
 function fetchCategories() {
@@ -65,12 +64,10 @@ function fetchCategories() {
 }
 fetchCategories()
 
-
 let showSideMenu = ref(false)
 function toggleSideMenu() {
   showSideMenu.value = !showSideMenu.value
 }
-
 </script>
 
 <style scoped>

@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center justify-center gap-x-3">
     <BaseIcon
-      class="text-xl font-semibold text-tealish-blue hover:cursor-pointer"
+      class="text-xl font-semibold text-han-blue hover:cursor-pointer"
       iconName="fa-plus"
       @click="addQuantity"
     />
@@ -16,7 +16,7 @@
       @blur="setDefaultIfEmpty"
     />
     <BaseIcon
-      class="text-xl font-semibold text-tealish-blue hover:cursor-pointer"
+      class="text-xl font-semibold text-han-blue hover:cursor-pointer"
       iconName="fa-minus"
       @click="subQuantity"
     />
@@ -36,7 +36,6 @@ function validateInput(event) {
 }
 
 function setDefaultIfEmpty(event) {
-
   //if we blur and the input is empty then set the default value of 1
   if (!event.target.value) {
     emit('update:modelValue', 1)
