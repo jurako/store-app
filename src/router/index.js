@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import ProductList from '../views/ProductList.vue'
 import CartView from '../views/CartView.vue'
-import SigninView from '../views/SigninView.vue'
+import LoginView from '../views/LoginView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,9 +22,9 @@ const router = createRouter({
       component: CartView
     },
     {
-      path: '/signin',
-      name: 'sign-in',
-      component: SigninView
+      path: '/login',
+      name: 'login',
+      component: LoginView
     }
   ]
 })

@@ -17,4 +17,9 @@ import { ref } from 'vue'
 let email = ref('');
 let password = ref('');
 
+import axios from 'axios'
+axios.get('', {baseURL: 'http://localhost:5273'})
+  .then((data) => console.log('Data: ', data))
+  .catch(err => console.log('Error: ', err));
+
 </script>

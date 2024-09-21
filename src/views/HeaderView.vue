@@ -21,7 +21,7 @@
         </RouterLink>
       </nav>
       <nav class="relative flex gap-x-5">
-        <RouterLink :to="{ name: 'sign-in' }">
+        <RouterLink :to="{ name: 'login' }">
           <BaseIcon icon="fa-user" />
         </RouterLink>
         <RouterLink :to="{ name: 'cart' }">
