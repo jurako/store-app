@@ -53,7 +53,6 @@ const storeCart = useCartStore()
 
 let playAnimation = ref(false)
 storeCart.$onAction((action) => {
-  console.log('action', action)
   if (action.name == 'addProduct' || action.name == 'removeProduct') {
     playAnimation.value = true
   }

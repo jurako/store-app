@@ -1,7 +1,7 @@
 <template>
   <div class="cart w-96 rounded-xl border bg-white p-8 shadow sm:w-full">
     <div class="mb-4 flex flex-wrap items-center justify-between gap-y-4">
-      <h1 class="text-3xl font-bold">Shopping cart</h1>
+      <h1 class="text-3xl font-bold text-neutral-600">Shopping cart</h1>
       <span class="font-semibold text-gray-500">{{ storeCart.products.length }} items</span>
       <div class="w-full">
         Sort by:
