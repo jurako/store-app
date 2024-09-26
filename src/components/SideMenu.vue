@@ -38,9 +38,6 @@ import LogoSvg from './LogoSvg.vue'
 export default {
   components: { LogoSvg },
   props: ['isVisible', 'categories'],
-  created() {
-    console.log('Is created')
-  },
   methods: {
     emitToggleCheckTarget(event) {
       if (!event.target.classList.contains('side-menu')) {

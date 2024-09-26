@@ -4,7 +4,7 @@
         <section class="flex flex-col items-center mt-11 mb-7 gap-y-5">
           <InputField class="w-full sm:w-1/2" v-model="email" placeholder="Email"/>
           <InputField class="w-full sm:w-1/2" v-model="password" placeholder="Password"/>
-          <BaseButton class="w-full sm:w-1/2">LOGIN</BaseButton>
+          <BaseButton class="w-full sm:w-1/2" @click="submit">LOGIN</BaseButton>
         </section>
     </div>
 </template>
@@ -12,14 +12,16 @@
 <script setup>
 import InputField from '@/components/form_items/InputField.vue';
 import BaseButton from '@/components/BaseButton.vue';
-import { ref } from 'vue'
+import axios from 'axios';
+import { ref } from 'vue';
 
 let email = ref('');
 let password = ref('');
 
-import axios from 'axios'
-axios.get('', {baseURL: 'http://localhost:5273'})
+function submit() {
+  axios.post('/login', {}, {baseURL: 'http://localhost:5273'})
   .then((data) => console.log('Data: ', data))
   .catch(err => console.log('Error: ', err));
+}
 
 </script>
