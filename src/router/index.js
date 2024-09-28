@@ -31,10 +31,7 @@ const router = createRouter({
     {
       path: '/orders',
       name: 'orders',
-      component: OrdersView,
-      beforeEnter: (to, from) => {
-        
-      }
+      component: OrdersView
     }
   ]
 })
@@ -42,7 +39,9 @@ const router = createRouter({
 router.beforeEach((to, from) => {
   const storeUser = useUserStore();
 
-  console.log(storeUser.isAuthenticated);
+  if(storeUser.isAuthenticated && to.name == 'login') {
+    return { name: 'home' };
+  }
 })
 
 export default router
