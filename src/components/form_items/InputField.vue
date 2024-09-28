@@ -10,11 +10,11 @@
 <script setup>
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
- modelValue: String,
- placeholder: String,
- inputType: {
+  modelValue: String,
+  placeholder: String,
+  inputType: {
     type: String,
     default: 'text'
- }
-});
+  }
+})
 </script>

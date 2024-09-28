@@ -1,3 +1,1 @@
-<template>
-    Hello from orders view!
-</template>
+<template>Hello from orders view!</template>

@@ -10,12 +10,22 @@ import {
   faPlus,
   faMinus,
   faArrowLeft,
-  faUser
+  faUser,
+  faRightFromBracket
 } from '@fortawesome/free-solid-svg-icons'
 /* import font awesome icon component */
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 /* add icons to the library */
-library.add(faCartShopping, faBars, faXmark, faPlus, faMinus, faArrowLeft, faUser)
+library.add(
+  faCartShopping,
+  faBars,
+  faXmark,
+  faPlus,
+  faMinus,
+  faArrowLeft,
+  faUser,
+  faRightFromBracket
+)
 import BaseIcon from '@/components/BaseIcon.vue'
 
 import { createApp } from 'vue'
