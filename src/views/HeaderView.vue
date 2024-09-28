@@ -21,8 +21,11 @@
         </RouterLink>
       </nav>
       <nav class="relative flex gap-x-5">
-        <RouterLink :to="{ name: 'login' }">
+        <RouterLink v-if="!storeUser.isAuthenticated" :to="{ name: 'login' }">
           <BaseIcon icon="fa-user" />
+        </RouterLink>
+        <RouterLink v-else :to="{ name: 'orders' }">
+          <span class="hover:underline">{{ storeUser.fullName }}</span>
         </RouterLink>
         <RouterLink :to="{ name: 'cart' }">
           <BaseIcon iconName="fa-cart-shopping" />
@@ -48,8 +51,10 @@ import axios from 'axios'
 import SideMenu from '@/components/SideMenu.vue'
 import LogoSvg from '@/components/LogoSvg.vue'
 import { useCartStore } from '@/stores/cart'
+import { useUserStore } from '@/stores/user'
 
-const storeCart = useCartStore()
+const storeCart = useCartStore();
+const storeUser = useUserStore();
 
 let playAnimation = ref(false)
 storeCart.$onAction((action) => {
