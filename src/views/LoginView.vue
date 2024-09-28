@@ -63,6 +63,10 @@ function submit() {
       .then((response) => {
         storeUser.user = response.data;
         storeUser.isAuthenticated = true;
+
+        localStorage.setItem('isAuth', storeUser.isAuthenticated);
+        localStorage.setItem('user',   JSON.stringify(storeUser.user));
+
         router.push({name: 'orders'});
       })
       .catch((err) => {
