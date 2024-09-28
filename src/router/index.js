@@ -1,7 +1,9 @@
+import { useUserStore } from '@/stores/user'
 import { createRouter, createWebHistory } from 'vue-router'
 import ProductList from '../views/ProductList.vue'
 import CartView from '../views/CartView.vue'
 import LoginView from '../views/LoginView.vue'
+import OrdersView from '../views/OrdersView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,8 +27,22 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: LoginView
+    },
+    {
+      path: '/orders',
+      name: 'orders',
+      component: OrdersView,
+      beforeEnter: (to, from) => {
+        
+      }
     }
   ]
+})
+
+router.beforeEach((to, from) => {
+  const storeUser = useUserStore();
+
+  console.log(storeUser.isAuthenticated);
 })
 
 export default router
