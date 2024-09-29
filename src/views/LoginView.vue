@@ -23,7 +23,13 @@
       >
         {{ errors.email ? errors.email : errors.password }}
       </p>
-      <BaseButton class="w-full sm:w-1/2" @click="submit">LOGIN</BaseButton>
+      <BaseButton class="uppercase w-full sm:w-1/2" @click="submit">Login</BaseButton>
+      <p>
+        Not a member?
+        <RouterLink class="text-han-blue hover:underline" :to="{ name: 'register' }"
+          >Register</RouterLink
+        >
+      </p>
     </section>
   </div>
 </template>
