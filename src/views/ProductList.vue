@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { axiosFakeStore } from '@/config/axios'
 import ProductCard from '../components/ProductCard.vue'
 
 export default {
@@ -35,7 +35,7 @@ export default {
         url.slug += '/category/' + this.$route.params.category_name
       }
 
-      axios.get(url.path + url.slug + url.query).then((response) => {
+      axiosFakeStore.get(url.path + url.slug + url.query).then((response) => {
         response.data.forEach((element) => {
           element.discount = Math.random() * (100 - 1) + 1
         })

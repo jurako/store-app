@@ -47,14 +47,14 @@
 <script setup>
 import { ref } from 'vue'
 
-import axios from 'axios'
+import { axiosFakeStore } from '@/config/axios'
 import SideMenu from '@/components/SideMenu.vue'
 import LogoSvg from '@/components/LogoSvg.vue'
 import { useCartStore } from '@/stores/cart'
 import { useUserStore } from '@/stores/user'
 
-const storeCart = useCartStore();
-const storeUser = useUserStore();
+const storeCart = useCartStore()
+const storeUser = useUserStore()
 
 let playAnimation = ref(false)
 storeCart.$onAction((action) => {
@@ -65,7 +65,7 @@ storeCart.$onAction((action) => {
 
 let categories = ref([])
 function fetchCategories() {
-  axios.get('/products/categories').then((response) => {
+  axiosFakeStore.get('/products/categories').then((response) => {
     categories.value = response.data
   })
 }

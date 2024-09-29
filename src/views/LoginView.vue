@@ -31,13 +31,13 @@
 <script setup>
 import InputField from '@/components/form_items/InputField.vue'
 import BaseButton from '@/components/BaseButton.vue'
-import axios from 'axios'
+import { axiosBackend } from '@/config/axios'
 import { ref } from 'vue'
-import { useUserStore } from '@/stores/user';
+import { useUserStore } from '@/stores/user'
 import { useRouter } from 'vue-router'
 
-const storeUser = useUserStore();
-const router = useRouter();
+const storeUser = useUserStore()
+const router = useRouter()
 
 let email = ref('')
 let password = ref('')
@@ -51,23 +51,22 @@ function submit() {
   errors.value = {}
 
   if (isValidEmail() && isValidPassword()) {
-    axios
-      .post('/login', {
-        email: email.value,
-        password: password.value,
-      },
-      {
-        baseURL: 'http://localhost:5273',
-        withCredentials: true
-      })
+    axiosBackend
+      .post(
+        '/login',
+        {
+          email: email.value,
+          password: password.value
+        }
+      )
       .then((response) => {
-        storeUser.user = response.data;
-        storeUser.isAuthenticated = true;
+        storeUser.user = response.data
+        storeUser.isAuthenticated = true
 
-        localStorage.setItem('isAuth', storeUser.isAuthenticated);
-        localStorage.setItem('user',   JSON.stringify(storeUser.user));
+        localStorage.setItem('isAuth', storeUser.isAuthenticated)
+        localStorage.setItem('user', JSON.stringify(storeUser.user))
 
-        router.push({name: 'orders'});
+        router.push({ name: 'orders' })
       })
       .catch((err) => {
         errors.value = err.response.data
