@@ -24,14 +24,14 @@ const router = createRouter({
       component: CartView
     },
     {
-      path: '/login',
-      name: 'login',
-      component: LoginView
-    },
-    {
       path: '/orders',
       name: 'orders',
       component: OrdersView
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginView
     }
   ]
 })

@@ -20,13 +20,18 @@
           {{ category }}
         </RouterLink>
       </nav>
-      <nav class="relative flex gap-x-5">
+      <nav class="relative flex items-center gap-x-6">
         <RouterLink v-if="!storeUser.isAuthenticated" :to="{ name: 'login' }">
           <BaseIcon icon="fa-user" />
         </RouterLink>
-        <RouterLink v-else :to="{ name: 'orders' }">
-          <span class="hover:underline">{{ storeUser.fullName }}</span>
-        </RouterLink>
+        <section v-else class="flex items-center gap-x-3">
+          <RouterLink :to="{ name: 'orders' }">
+            <span class="hover:underline">{{ storeUser.fullName }}</span>
+          </RouterLink>
+          <a @click="storeUser.logout()">
+            <BaseIcon icon="fa-right-from-bracket" />
+          </a>
+        </section>
         <RouterLink :to="{ name: 'cart' }">
           <BaseIcon iconName="fa-cart-shopping" />
         </RouterLink>
