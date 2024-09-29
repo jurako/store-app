@@ -52,13 +52,10 @@ function submit() {
 
   if (isValidEmail() && isValidPassword()) {
     axiosBackend
-      .post(
-        '/login',
-        {
-          email: email.value,
-          password: password.value
-        }
-      )
+      .post('/login', {
+        email: email.value,
+        password: password.value
+      })
       .then((response) => {
         storeUser.user = response.data
         storeUser.isAuthenticated = true
