@@ -1,13 +1,15 @@
 <template>
-  <input
-    type="radio"
-    :id="value"
-    :name="name"
-    :value="value"
-    :checked="value == modelValue"
-    @change="() => $emit('update:modelValue')"
-  />
-  <label :for="value">{{ value }}</label>
+  <label>
+    <input
+      type="radio"
+      class="-mt-px"
+      :name="name"
+      :value="value"
+      :checked="value == modelValue"
+      @change="() => $emit('update:modelValue')"
+    />
+    {{ value }}
+  </label>
 </template>
 
 <script setup>
