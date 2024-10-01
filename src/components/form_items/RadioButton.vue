@@ -6,7 +6,7 @@
       :name="name"
       :value="value"
       :checked="value == modelValue"
-      @change="() => $emit('update:modelValue')"
+      @change="$emit('update:modelValue', $event.target.value)"
     />
     {{ value }}
   </label>
