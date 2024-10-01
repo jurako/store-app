@@ -3,12 +3,13 @@
     <input
       type="radio"
       class="-mt-px"
+      :label="label"
       :name="name"
       :value="value"
       :checked="value == modelValue"
       @change="$emit('update:modelValue', $event.target.value)"
     />
-    {{ value }}
+    {{ label }}
   </label>
 </template>
 
@@ -16,6 +17,10 @@
 defineProps({
   name: String,
   value: {
+    type: String,
+    default: ''
+  },
+  label: {
     type: String,
     default: ''
   },
