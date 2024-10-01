@@ -4,14 +4,14 @@
     <section class="mb-7 mt-11 flex flex-col items-center gap-y-5">
       <InputField
         class="w-full sm:w-1/2"
-        :class="[errors.email ? errorClasses : '']"
+        :class="[errors.email ? Validator.errorClasses : '']"
         v-model="email"
         placeholder="Email"
         ref="emailInput"
       />
       <InputField
         class="w-full sm:w-1/2"
-        :class="[errors.password ? errorClasses : '']"
+        :class="[errors.password ? Validator.errorClasses : '']"
         inputType="password"
         v-model="password"
         placeholder="Password"
@@ -41,6 +41,7 @@ import { axiosBackend } from '@/config/axios'
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/user'
 import { useRouter } from 'vue-router'
+import { Validator, isObjectEmpty } from '@/misc/helpers'
 
 const storeUser = useUserStore()
 const router = useRouter()
@@ -49,14 +50,32 @@ let email = ref('')
 let password = ref('')
 let errors = ref({})
 
-const errorClasses = ['border-red-600', 'border-2']
 const emailInput = ref(null)
 const passwordInput = ref(null)
 
 function submit() {
   errors.value = {}
 
-  if (isValidEmail() && isValidPassword()) {
+  if(Validator.isEmpty(email.value)) {
+    errors.value.email = Validator.ERRORS.EMPTY_FIELD;
+    //TODO
+    // emailInput.value.focus();
+    return false;
+  }
+  if(Validator.isInvalidEmail(email.value)) {
+    errors.value.email = Validator.ERRORS.INVALID_EMAIL;
+    //TODO
+    // emailInput.value.focus();
+    return false;
+  }
+  if(Validator.isEmpty(password.value)) {
+    errors.value.password = Validator.ERRORS.EMPTY_FIELD;
+    //TODO
+    // passwordInput.value.focus()
+    return false;
+  }
+
+  if (isObjectEmpty(errors.value)) {
     axiosBackend
       .post('/login', {
         email: email.value,
@@ -75,33 +94,5 @@ function submit() {
         errors.value = err.response.data
       })
   }
-}
-
-function isValidEmail() {
-  if (!email.value) {
-    errors.value.email = 'Please fill out this field'
-    //TODO
-    // emailInput.value.focus();
-    return false
-  }
-
-  if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)) {
-    errors.value.email = 'Please enter a valid email address'
-    //TODO
-    // emailInput.value.focus();
-    return false
-  }
-
-  return true
-}
-function isValidPassword() {
-  if (!password.value) {
-    errors.value.password = 'Please fill out this field'
-    //TODO
-    // passwordInput.value.focus()
-    return false
-  }
-
-  return true
 }
 </script>
