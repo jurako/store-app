@@ -30,11 +30,11 @@ class Validator {
         throw new Error('Invalid validation item value, must be an Object')
 
       if (
-        !validationObj.hasOwnProperty('value') ||
+        !validationObj.hasOwnProperty('ref') ||
         !validationObj.hasOwnProperty('rules') ||
         !validationObj.hasOwnProperty('errorField')
       )
-        throw new Error('Validation object must contain value, errorField and rules properties')
+        throw new Error('Validation object must contain ref, rules and errorField properties')
     }
   }
 }
