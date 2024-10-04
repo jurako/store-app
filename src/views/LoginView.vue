@@ -20,7 +20,7 @@
       <ErrorMessage v-show="!isObjectEmpty(errors)">
         {{ errors.email || errors.password }}
       </ErrorMessage>
-      <BaseButton class="uppercase w-full sm:w-1/2" @click="submit">Login</BaseButton>
+      <BaseButton class="w-full uppercase sm:w-1/2" @click="submit">Login</BaseButton>
       <p>
         Not a member?
         <RouterLink class="text-han-blue hover:underline" :to="{ name: 'register' }"
@@ -39,39 +39,23 @@ import { axiosBackend } from '@/config/axios'
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/user'
 import { useRouter } from 'vue-router'
-import { Validator, isObjectEmpty } from '@/misc/helpers'
+import { isEmpty, isInvalidEmail, Validator, isObjectEmpty } from '@/misc/helpers'
 
 const storeUser = useUserStore()
 const router = useRouter()
 
-let email = ref('')
-let password = ref('')
-let errors = ref({})
+const email = ref('')
+const password = ref('')
+const errors = ref({})
 
-const emailInput = ref(null)
-const passwordInput = ref(null)
+const validator = new Validator([
+  { ref: email, rules: [isInvalidEmail], errorField: 'email' },
+  { ref: password, rules: [isEmpty], errorField: 'password' }
+])
 
 function submit() {
-  errors.value = {}
-
-  if(Validator.isEmpty(email.value)) {
-    errors.value.email = Validator.ERRORS.EMPTY_FIELD;
-    //TODO
-    // emailInput.value.focus();
-    return false;
-  }
-  if(Validator.isInvalidEmail(email.value)) {
-    errors.value.email = Validator.ERRORS.INVALID_EMAIL;
-    //TODO
-    // emailInput.value.focus();
-    return false;
-  }
-  if(Validator.isEmpty(password.value)) {
-    errors.value.password = Validator.ERRORS.EMPTY_FIELD;
-    //TODO
-    // passwordInput.value.focus()
-    return false;
-  }
+  validator.validate()
+  errors.value = validator.errors
 
   if (isObjectEmpty(errors.value)) {
     axiosBackend
