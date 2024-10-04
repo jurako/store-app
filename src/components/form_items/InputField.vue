@@ -10,7 +10,7 @@
 <script setup>
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
-  modelValue: String,
+  modelValue: [String, Number],
   placeholder: String,
   inputType: {
     type: String,
