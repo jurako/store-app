@@ -57,7 +57,6 @@ import InputField from '@/components/form_items/InputField.vue'
 import RadioButton from '@/components/form_items/RadioButton.vue'
 import ErrorMessage from '@/components/form_items/ErrorMessage.vue'
 import BaseButton from '@/components/BaseButton.vue'
-import BaseButton from '@/components/BaseButton.vue'
 import { ref } from 'vue'
 import { isEmpty, isInvalidEmail, Validator, isObjectEmpty } from '@/misc/helpers'
 
