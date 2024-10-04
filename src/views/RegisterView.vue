@@ -23,6 +23,9 @@
         <option value="Estonia">Estonia</option>
         <option value="Lithuania">Lithuania</option>
       </select>
+      <ErrorMessage v-show="!isObjectEmpty(errors)">
+        {{ errors.firstName || errors.lastName || errors.email || errors.password }}
+      </ErrorMessage>
       <BaseButton class="uppercase">
         Submit
       </BaseButton>
@@ -33,6 +36,7 @@
 <script setup>
 import InputField from '@/components/form_items/InputField.vue'
 import RadioButton from '@/components/form_items/RadioButton.vue'
+import ErrorMessage from '@/components/form_items/ErrorMessage.vue'
 import BaseButton from '@/components/BaseButton.vue';
 import { ref } from 'vue'
 

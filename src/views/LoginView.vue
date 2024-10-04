@@ -17,12 +17,9 @@
         placeholder="Password"
         ref="passwordInput"
       />
-      <p
-        class="w-full rounded-2xl bg-red-300 p-2 text-center font-semibold text-red-700 sm:w-1/2"
-        v-show="errors.email || errors.password"
-      >
-        {{ errors.email ? errors.email : errors.password }}
-      </p>
+      <ErrorMessage v-show="!isObjectEmpty(errors)">
+        {{ errors.email || errors.password }}
+      </ErrorMessage>
       <BaseButton class="uppercase w-full sm:w-1/2" @click="submit">Login</BaseButton>
       <p>
         Not a member?
@@ -36,6 +33,7 @@
 
 <script setup>
 import InputField from '@/components/form_items/InputField.vue'
+import ErrorMessage from '@/components/form_items/ErrorMessage.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import { axiosBackend } from '@/config/axios'
 import { ref } from 'vue'
