@@ -72,7 +72,7 @@ const errors = ref({})
 const validator = new Validator([
   { ref: firstName, errorField: 'firstName', rules: [isEmpty] },
   { ref: lastName, errorField: 'lastName', rules: [isEmpty] },
-  { ref: email, errorField: 'email', rules: [isEmpty, isInvalidEmail] },
+  { ref: email, errorField: 'email', rules: [isInvalidEmail] },
   { ref: password, errorField: 'password', rules: [isEmpty] }
 ])
 
