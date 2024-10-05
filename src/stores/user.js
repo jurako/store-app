@@ -12,7 +12,7 @@ export const useUserStore = defineStore('user', {
     isAuthenticated: persistedData.isAuth ?? false
   }),
   getters: {
-    fullName: (state) => state.user.name + ' ' + state.user.surname
+    fullName: (state) => state.user.name + ' ' + state.user.lastName
   },
   actions: {
     logout() {

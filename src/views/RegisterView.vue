@@ -4,8 +4,8 @@
     <section class="mb-7 mt-11 space-y-6">
       <div class="flex flex-col gap-y-6 sm:flex-row sm:items-center sm:gap-x-6">
         <InputField
-          v-model="firstName"
-          :class="[errors.firstName ? Validator.errorClasses : '']"
+          v-model="name"
+          :class="[errors.name ? Validator.errorClasses : '']"
           class="w-full sm:w-1/2"
           placeholder="First Name"
         />
@@ -45,7 +45,7 @@
         <option value="Lithuania">Lithuania</option>
       </select>
       <ErrorMessage v-show="!isObjectEmpty(errors)">
-        {{ errors.firstName || errors.lastName || errors.email || errors.password }}
+        {{ errors.name || errors.lastName || errors.email || errors.password }}
       </ErrorMessage>
       <BaseButton @click="submit" class="uppercase"> Submit </BaseButton>
     </section>
@@ -60,7 +60,10 @@ import BaseButton from '@/components/BaseButton.vue'
 import { ref } from 'vue'
 import { isEmpty, isInvalidEmail, Validator, isObjectEmpty } from '@/misc/helpers'
 
-const firstName = ref('')
+const storeUser = useUserStore();
+const router = useRouter();
+
+const name = ref('')
 const lastName = ref('')
 const birthday = ref(0)
 const gender = ref('F')
@@ -70,7 +73,7 @@ const country = ref('')
 const errors = ref({})
 
 const validator = new Validator([
-  { ref: firstName, errorField: 'firstName', rules: [isEmpty] },
+  { ref: name, errorField: 'name', rules: [isEmpty] },
   { ref: lastName, errorField: 'lastName', rules: [isEmpty] },
   { ref: email, errorField: 'email', rules: [isInvalidEmail] },
   { ref: password, errorField: 'password', rules: [isEmpty] }
