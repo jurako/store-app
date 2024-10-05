@@ -63,12 +63,8 @@ function submit() {
         email: email.value,
         password: password.value
       })
-      .then((response) => {
-        storeUser.user = response.data
-        storeUser.isAuthenticated = true
-
-        localStorage.setItem('isAuth', storeUser.isAuthenticated)
-        localStorage.setItem('user', JSON.stringify(storeUser.user))
+      .then((response) => {        
+        storeUser.persistDataAfterLogin(response.data)
 
         router.push({ name: 'orders' })
       })

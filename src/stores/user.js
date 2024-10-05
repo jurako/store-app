@@ -25,6 +25,15 @@ export const useUserStore = defineStore('user', {
 
         this.router.push({ name: 'home' })
       })
+    },
+    persistDataAfterLogin(data) {
+      //pinia store
+      this.user = data;
+      this.isAuthenticated = true;
+
+      //local storage
+      localStorage.setItem('isAuth', true);
+      localStorage.setItem('user', JSON.stringify(data));
     }
   }
 })

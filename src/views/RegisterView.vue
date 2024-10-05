@@ -57,6 +57,9 @@ import InputField from '@/components/form_items/InputField.vue'
 import RadioButton from '@/components/form_items/RadioButton.vue'
 import ErrorMessage from '@/components/form_items/ErrorMessage.vue'
 import BaseButton from '@/components/BaseButton.vue'
+import { useUserStore } from '@/stores/user'
+import { useRouter } from 'vue-router'
+import { axiosBackend } from '@/config/axios'
 import { ref } from 'vue'
 import { isEmpty, isInvalidEmail, Validator, isObjectEmpty } from '@/misc/helpers'
 
@@ -84,7 +87,17 @@ function submit() {
   errors.value = validator.errors
 
   if (isObjectEmpty(errors.value)) {
-    alert('Good to submit register form!')
+    axiosBackend.post('/register', {
+      name: name.value,
+      lastName: lastName.value,
+      email: email.value,
+      password: password.value
+    }).then((response) =>{
+      storeUser.persistDataAfterLogin(response.data);
+      router.push({ name: 'orders' });
+    }).catch((err) => {
+      errors.value = err.response.data
+    })
   }
 }
 </script>
