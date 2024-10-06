@@ -63,8 +63,8 @@ import { axiosBackend } from '@/config/axios'
 import { ref } from 'vue'
 import { isEmpty, isInvalidEmail, Validator, isObjectEmpty } from '@/misc/helpers'
 
-const storeUser = useUserStore();
-const router = useRouter();
+const storeUser = useUserStore()
+const router = useRouter()
 
 const name = ref('')
 const lastName = ref('')
@@ -87,17 +87,20 @@ function submit() {
   errors.value = validator.errors
 
   if (isObjectEmpty(errors.value)) {
-    axiosBackend.post('/register', {
-      name: name.value,
-      lastName: lastName.value,
-      email: email.value,
-      password: password.value
-    }).then((response) =>{
-      storeUser.persistDataAfterLogin(response.data);
-      router.push({ name: 'orders' });
-    }).catch((err) => {
-      errors.value = err.response.data
-    })
+    axiosBackend
+      .post('/register', {
+        name: name.value,
+        lastName: lastName.value,
+        email: email.value,
+        password: password.value
+      })
+      .then((response) => {
+        storeUser.persistDataAfterLogin(response.data)
+        router.push({ name: 'orders' })
+      })
+      .catch((err) => {
+        errors.value = err.response.data
+      })
   }
 }
 </script>

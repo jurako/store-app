@@ -63,7 +63,7 @@ function submit() {
         email: email.value,
         password: password.value
       })
-      .then((response) => {        
+      .then((response) => {
         storeUser.persistDataAfterLogin(response.data)
 
         router.push({ name: 'orders' })

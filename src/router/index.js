@@ -22,12 +22,14 @@ const router = createRouter({
     {
       path: '/cart',
       name: 'cart',
-      component: CartView
+      component: CartView,
+      meta: { authRequired: true }
     },
     {
       path: '/orders',
       name: 'orders',
-      component: OrdersView
+      component: OrdersView,
+      meta: { authRequired: true }
     },
     {
       path: '/register',
@@ -45,7 +47,10 @@ const router = createRouter({
 router.beforeEach((to, from) => {
   const storeUser = useUserStore()
 
-  if (storeUser.isAuthenticated && to.name == 'login') {
+  if (
+    (!storeUser.isAuthenticated && to.meta.authRequired) ||
+    (storeUser.isAuthenticated && to.name == 'login')
+  ) {
     return { name: 'home' }
   }
 })

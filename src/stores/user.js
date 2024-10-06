@@ -28,12 +28,12 @@ export const useUserStore = defineStore('user', {
     },
     persistDataAfterLogin(data) {
       //pinia store
-      this.user = data;
-      this.isAuthenticated = true;
+      this.user = data
+      this.isAuthenticated = true
 
       //local storage
-      localStorage.setItem('isAuth', true);
-      localStorage.setItem('user', JSON.stringify(data));
+      localStorage.setItem('isAuth', true)
+      localStorage.setItem('user', JSON.stringify(data))
     }
   }
 })
