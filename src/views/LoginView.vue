@@ -49,8 +49,8 @@ const password = ref('')
 const errors = ref({})
 
 const validator = new Validator([
-  { ref: email, rules: [isInvalidEmail], errorField: 'email' },
-  { ref: password, rules: [isEmpty], errorField: 'password' }
+  { rule: isEmpty, fields: { email, password } },
+  { rule: isInvalidEmail, fields: { email } }
 ])
 
 function submit() {

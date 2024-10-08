@@ -1,3 +1,5 @@
+import { isObjectEmpty } from './helpers'
+
 class Validator {
   static errorClasses = ['border-red-600', 'border-2']
 
@@ -12,29 +14,29 @@ class Validator {
     this.errors = {}
 
     for (const item of this.items) {
-      for (const rule of item.rules) {
-        if (rule.fails(item.ref.value)) {
-          this.errors[item.errorField] = rule.errorMsg
+      for (const [field, ref] of Object.entries(item.fields)) {
+        if (item.rule.fails(ref.value)) {
+          this.errors[field] = item.rule.errorMsg
         }
       }
+
+      if (Object.keys(this.errors).length) break
     }
   }
 
-  #validateArgument(rules) {
-    if (rules?.constructor?.name != 'Array') throw new Error('Passed value is not an Array')
+  #validateArgument(items) {
+    if (items?.constructor?.name != 'Array') throw new Error('Passed value is not an Array')
 
-    if (!rules.length) throw new Error('Validator must contain atleast one validation item')
+    if (!items.length) throw new Error('Validator must contain atleast one validation item')
 
-    for (const validationObj of rules) {
-      if (validationObj?.constructor?.name != 'Object')
-        throw new Error('Invalid validation item value, must be an Object')
+    for (const item of items) {
+      if (!isObjectEmpty(item)) throw new Error('Invalid validation item value, must be an Object')
 
-      if (
-        !validationObj.hasOwnProperty('ref') ||
-        !validationObj.hasOwnProperty('rules') ||
-        !validationObj.hasOwnProperty('errorField')
-      )
-        throw new Error('Validation object must contain ref, rules and errorField properties')
+      if (!item.hasOwnProperty('rule') || !item.hasOwnProperty('fields'))
+        throw new Error('Validation item must contain rule and fields properties')
+
+      if (!isObjectEmpty(item.fields))
+        throw new Error("Validation item's field property is missing values")
     }
   }
 }
@@ -46,7 +48,7 @@ class ValidationRule {
 }
 
 class isEmptyRule extends ValidationRule {
-  errorMsg = 'Please fill out this field'
+  errorMsg = 'Please fill in all fields'
 
   fails(value) {
     return !value

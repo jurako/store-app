@@ -76,10 +76,8 @@ const country = ref('')
 const errors = ref({})
 
 const validator = new Validator([
-  { ref: name, errorField: 'name', rules: [isEmpty] },
-  { ref: lastName, errorField: 'lastName', rules: [isEmpty] },
-  { ref: email, errorField: 'email', rules: [isInvalidEmail] },
-  { ref: password, errorField: 'password', rules: [isEmpty] }
+  { rule: isEmpty, fields: { name, lastName, email, password } },
+  { rule: isInvalidEmail, fields: { email } }
 ])
 
 function submit() {
