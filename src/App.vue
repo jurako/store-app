@@ -13,7 +13,7 @@ export default {
     HeaderView
   },
   provide: {
-    APICurrency: '$'
+    AppCurrency: '€'
   }
 }
 </script>

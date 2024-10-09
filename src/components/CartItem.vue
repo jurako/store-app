@@ -13,7 +13,7 @@
     </div>
     <AmountField class="mb-4 sm:mb-0" v-model="storeCart.products[index].quantity" />
     <div class="flex items-center justify-between sm:flex-grow">
-      <span>{{ APICurrency + ' ' + storeCart.products[index].price.toFixed(2) }}</span>
+      <span>{{ AppCurrency + ' ' + storeCart.products[index].price.toFixed(2) }}</span>
       <BaseIcon icon="fa-xmark" @click="storeCart.removeProduct(index)" />
     </div>
   </div>
@@ -25,7 +25,7 @@ import { useCartStore } from '@/stores/cart'
 
 import AmountField from '@/components/AmountField.vue'
 
-const APICurrency = inject('APICurrency')
+const AppCurrency = inject('AppCurrency')
 const storeCart = useCartStore()
 defineProps(['index'])
 </script>

@@ -50,7 +50,7 @@ import BaseButton from '@/components/BaseButton.vue'
 
 const quantity = ref(parseInt(Math.random() * (15 - 1) + 1))
 const props = defineProps(['product'])
-const currency = inject(['APICurrency'])
+const currency = inject(['AppCurrency'])
 const storeCart = useCartStore()
 
 function handleAddToCart(product, quantity) {
