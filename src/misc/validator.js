@@ -30,12 +30,12 @@ class Validator {
     if (!items.length) throw new Error('Validator must contain atleast one validation item')
 
     for (const item of items) {
-      if (!isObjectEmpty(item)) throw new Error('Invalid validation item value, must be an Object')
+      if (isObjectEmpty(item)) throw new Error('Invalid validation item value, must be an Object')
 
       if (!item.hasOwnProperty('rule') || !item.hasOwnProperty('fields'))
         throw new Error('Validation item must contain rule and fields properties')
 
-      if (!isObjectEmpty(item.fields))
+      if (isObjectEmpty(item.fields))
         throw new Error("Validation item's field property is missing values")
     }
   }
